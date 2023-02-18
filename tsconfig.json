@@ -2,12 +2,24 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "~components/*": ["src/components/*"],
-      "~layout/*": ["src/layout/*"],
-      "~pages/*": ["src/pages/*"],
-      "~styles/*": ["src/styles/*"],
-      "~/*": ["src/*"],
-      "global": ["src/styles/global"]
+      "~components/*": [
+        "src/components/*"
+      ],
+      "~layout/*": [
+        "src/layout/*"
+      ],
+      "~pages/*": [
+        "src/pages/*"
+      ],
+      "~styles/*": [
+        "src/styles/*"
+      ],
+      "~/*": [
+        "src/*"
+      ],
+      "global": [
+        "src/styles/global"
+      ]
     },
     "target": "es2015",
     "moduleResolution": "node",
@@ -24,11 +36,28 @@
     "declaration": true,
     "noFallthroughCasesInSwitch": false,
     "jsx": "preserve",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "module": "esnext",
-    "plugins": [{ "name": "typescript-plugin-css-modules" }]
+    "plugins": [
+      {
+        "name": "typescript-plugin-css-modules"
+      }
+    ],
+    "incremental": true
   },
-  "include": ["next-env.d.ts", "src", "**/*.ts", "**/*.tsx", "setupTests.js"],
-  "exclude": ["node_modules"]
+  "include": [
+    "next-env.d.ts",
+    "src",
+    "**/*.ts",
+    "**/*.tsx",
+    "setupTests.js"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }
