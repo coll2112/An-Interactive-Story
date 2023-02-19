@@ -1,6 +1,5 @@
-import React from 'react'
-import Main from '~components/Main'
+import StoryWizard from '~components/StoryWizard'
 
-const Home = () => <Main />
+const Home = () => <StoryWizard />
 
 export default Home

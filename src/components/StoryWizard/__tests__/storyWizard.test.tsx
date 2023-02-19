@@ -1,10 +1,9 @@
-import React from 'react'
 import { render, screen } from '@testing-library/react'
-import Main from '~/components/Main'
+import StoryWizard from '~components/StoryWizard'
 
-describe('Main', () => {
+describe('StoryWizard', () => {
   it('should render correctly', () => {
-    render(<Main />)
+    render(<StoryWizard />)
     expect(screen.getByText(/start coding/i)).toBeInTheDocument()
   })
 })
