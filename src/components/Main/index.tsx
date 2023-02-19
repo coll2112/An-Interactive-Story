@@ -4,7 +4,7 @@ import { StoryTree } from '~/config/story'
 import styles from './main.module.scss'
 
 const Main = () => {
-  const [storySection, setStorySection] = useState('start-chapter')
+  const [storySection, setStorySection] = useState<string>('start-chapter')
   const [storyChapterIndex, setStoryChapterIndex] = useState<number>(0)
 
   const chapter = StoryTree.find((c) => c.chapterIndex === storyChapterIndex)
@@ -23,6 +23,18 @@ const Main = () => {
     }
   }
 
+  const handleSaveGame = () => {
+    localStorage.setItem('story-section', storySection)
+    localStorage.setItem('chapter', JSON.stringify(storyChapterIndex))
+  }
+
+  const handleLoadGame = () => {
+    const section = localStorage.getItem('story-section') as string
+    const chapterIndex = Number(localStorage.getItem('chapter'))
+    setStoryChapterIndex(chapterIndex)
+    setStorySection(section)
+  }
+
   return (
     <div className={styles.container}>
       <h3>{chapter?.['chapterName']}</h3>
@@ -36,6 +48,12 @@ const Main = () => {
           {choice.text}
         </button>
       ))}
+      <button type="button" onClick={() => handleSaveGame()}>
+        Save Game
+      </button>
+      <button type="button" onClick={() => handleLoadGame()}>
+        Load Game
+      </button>
     </div>
   )
 }
