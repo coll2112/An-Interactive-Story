@@ -1,6 +1,7 @@
 import clsx from 'clsx'
 import { useState } from 'react'
 import { StoryTree } from '~/config/story'
+import { Choice as ChoiceType } from '~/types/story'
 import ChapterHeading from '~components/ChapterHeading'
 import Choice from '~components/Choice'
 import SectionText from '~components/SectionText'
@@ -12,18 +13,20 @@ const StoryWizard = () => {
   const [storyChapterIndex, setStoryChapterIndex] = useState<number>(0)
 
   const chapter = StoryTree.find((c) => c.chapterIndex === storyChapterIndex)
-  const choices = chapter?.sections[storySection]?.choices
 
   const setNextChapterStart = () => {
     setStoryChapterIndex((state) => state + 1)
     setStorySection('start-chapter')
   }
 
-  const handleChoices = (choiceEvent: string) => {
-    if (choiceEvent === 'end-chapter') {
+  const handleChoices = (choice: ChoiceType) => {
+    if (choice.event === 'end-chapter') {
       setNextChapterStart()
     } else {
-      setStorySection(choiceEvent)
+      if (choice.dependency) {
+        console.log(chapter?.choiceDependencies)
+      }
+      setStorySection(choice.event)
     }
   }
 
@@ -49,6 +52,18 @@ const StoryWizard = () => {
   //   }
   // }, [])
 
+  const handleCreateChoices = (): ChoiceType[] | undefined => {
+    const choices = chapter?.sections[storySection]?.choices?.filter(
+      (c) => c.dependency !== false
+    )
+
+    return choices
+  }
+
+  const choices = handleCreateChoices()
+
+  console.log(choices)
+
   return (
     <div className={styles.container}>
       <ChapterHeading chapterHeading={chapter?.['chapterName'] as string} />
@@ -67,7 +82,7 @@ const StoryWizard = () => {
           <Choice
             key={choice.event}
             choice={choice}
-            onClick={() => handleChoices(choice.event)}
+            onClick={() => handleChoices(choice)}
           />
         ))}
       </div>

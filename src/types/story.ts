@@ -8,6 +8,11 @@ export interface ChapterChoices {
 export interface Choice {
   event: string
   text: string
+  dependency?: boolean
+}
+
+export interface Dependencies {
+  [x: string]: boolean
 }
 
 export interface Section {
@@ -20,5 +25,6 @@ export interface Section {
 export interface Chapter {
   chapterIndex: number
   chapterName: string
+  choiceDependencies: Dependencies
   sections: Section
 }

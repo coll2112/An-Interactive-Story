@@ -2,10 +2,16 @@ import { Chapter, ChapterChoices } from '~/types/story'
 
 const CHOICES: ChapterChoices = {
   startChapter: { event: 'startChapter' },
+  takeBlanket: { event: 'takeBlanket' },
   lineTwo: { event: 'lineOne' },
   drinkCoffee: { event: 'drinkCoffee' },
   ignoreCoffee: { event: 'ignoreCoffee' },
+  coverUpWithBlanket: { event: 'coverUpWithBlanket' },
   endChapter: { event: 'endChapter' }
+}
+
+const choiceDependencies = {
+  hasTakenBlanket: false
 }
 
 /** Returns the event of the choice passed in. */
@@ -14,6 +20,7 @@ const handleEvent = (event: string) => CHOICES[event].event
 export const ChapterOne: Chapter = {
   chapterIndex: 0,
   chapterName: 'Chapter 1: Coffee Time',
+  choiceDependencies,
   sections: {
     [handleEvent('startChapter')]: {
       text: `The sky is the color of ash. The wind hits the old window of
@@ -21,7 +28,22 @@ export const ChapterOne: Chapter = {
       you. The cold draft seeps underneath the doorway.`,
       choices: [
         {
-          text: "It's so cold...",
+          text: 'Next',
+          event: handleEvent('lineTwo')
+        },
+        {
+          text: 'Take the extra blanket from the couch',
+          event: handleEvent('takeBlanket')
+        }
+      ]
+    },
+    [handleEvent('takeBlanket')]: {
+      text: `Standing up, your feet quickly hit the bitter, cold floor as you
+      dash across the room to grab the spare blanket. Just as quickly as before,
+      you dart back to seat you were sitting in, still warm from before.`,
+      choices: [
+        {
+          text: 'Next',
           event: handleEvent('lineTwo')
         }
       ]
@@ -53,6 +75,18 @@ export const ChapterOne: Chapter = {
     [handleEvent('drinkCoffee')]: {
       text: `The hot coffee hits your lip. You flinch to the sudden, bitter, bite it leaves on
       your tongue. Perhaps you should have let it cool off more...`,
+      choices: [
+        { text: 'Next', event: handleEvent('endChapter') },
+        {
+          text: 'Cover Up With Blanket',
+          event: handleEvent('coverUpWithBlanket'),
+          dependency: choiceDependencies.hasTakenBlanket
+        }
+      ]
+    },
+    [handleEvent('coverUpWithBlanket')]: {
+      text: `You wrap up in your nice, warm blanket shielding yourself from
+      the cold draft entering through the cracks in this old house`,
       choices: [{ text: 'Next', event: handleEvent('endChapter') }]
     },
     [handleEvent('endChapter')]: {
