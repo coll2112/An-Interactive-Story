@@ -10,14 +10,14 @@ const Main = () => {
   const chapter = StoryTree.find((c) => c.chapterIndex === storyChapterIndex)
   const choices = chapter?.sections[storySection]?.choices
 
-  const setNextChapter = () => {
+  const setNextChapterStart = () => {
     setStoryChapterIndex((state) => state + 1)
     setStorySection('start-chapter')
   }
 
   const handleChoices = (choice: any) => {
     if (choice === 'end-chapter') {
-      setNextChapter()
+      setNextChapterStart()
     } else {
       setStorySection(choice)
     }
