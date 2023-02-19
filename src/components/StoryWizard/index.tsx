@@ -1,3 +1,4 @@
+import clsx from 'clsx'
 import { useState } from 'react'
 import { StoryTree } from '~/config/story'
 import ChapterHeading from '~components/ChapterHeading'
@@ -44,13 +45,22 @@ const StoryWizard = () => {
       <SectionText
         sectionText={chapter?.sections[storySection]?.text as string}
       />
-      {choices?.map((choice) => (
-        <Choices
-          key={choice.event}
-          choice={choice}
-          onClick={() => handleChoices(choice.event)}
-        />
-      ))}
+      <div
+        className={clsx(
+          styles['btn-container'],
+          choices && choices.length <= 1
+            ? styles['btn-container-single-choice']
+            : styles['btn-container-multiple-choice']
+        )}
+      >
+        {choices?.map((choice) => (
+          <Choices
+            key={choice.event}
+            choice={choice}
+            onClick={() => handleChoices(choice.event)}
+          />
+        ))}
+      </div>
       {/* <button type="button" onClick={() => handleSaveGame()}>
         Save Game
       </button>
