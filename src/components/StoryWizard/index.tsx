@@ -2,7 +2,7 @@ import clsx from 'clsx'
 import { useState } from 'react'
 import { StoryTree } from '~/config/story'
 import ChapterHeading from '~components/ChapterHeading'
-import Choices from '~components/Choices'
+import Choice from '~components/Choice'
 import SectionText from '~components/SectionText'
 
 import styles from './storyWizard.module.scss'
@@ -39,7 +39,15 @@ const StoryWizard = () => {
   //   setStorySection(section)
   // }
 
-  console.log(choices)
+  // Created auto load
+  // useEffect(() => {
+  //   if (
+  //     localStorage.getItem('chapter') &&
+  //     localStorage.getItem('story-section')
+  //   ) {
+  //     handleLoadGame()
+  //   }
+  // }, [])
 
   return (
     <div className={styles.container}>
@@ -56,19 +64,19 @@ const StoryWizard = () => {
         )}
       >
         {choices?.map((choice) => (
-          <Choices
+          <Choice
             key={choice.event}
             choice={choice}
             onClick={() => handleChoices(choice.event)}
           />
         ))}
       </div>
-      {/* <button type="button" onClick={() => handleSaveGame()}>
+      {/* <Button type="button" onClick={() => handleSaveGame()}>
         Save Game
-      </button>
-      <button type="button" onClick={() => handleLoadGame()}>
+      </Button>
+      <Button type="button" onClick={() => handleLoadGame()}>
         Load Game
-      </button> */}
+      </Button> */}
     </div>
   )
 }
