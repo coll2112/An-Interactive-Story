@@ -1,16 +1,20 @@
 const chapter1 = {
-  start: 'start',
+  startChapter: 'start-chapter',
   readyToPlay: 'ready-to-play',
   letsPlay: 'lets-play',
   nah: 'nah',
-  end: 'end'
+  endChapter: 'end-chapter'
 }
 
-export const StoryTree = {
+const chapter2 = {
+  startChapter: 'start-chapter'
+}
+
+export const ChapterOne = {
   chapterIndex: 0,
   chapterName: 'Chapter 1 - The Adventure Begins...',
   sections: {
-    [chapter1.start]: {
+    [chapter1.startChapter]: {
       text: 'Hi, welcome to the game',
       choices: [chapter1.readyToPlay]
     },
@@ -24,10 +28,20 @@ export const StoryTree = {
     },
     [chapter1.nah]: {
       text: "Oh, that's too bad. Maybe next time.",
-      choices: [chapter1.end]
-    },
-    [chapter1.end]: {
-      text: 'This is the end '
+      choices: [chapter1.endChapter]
     }
   }
 }
+
+export const ChapterTwo = {
+  chapterIndex: 1,
+  chapterName: 'Chapter 2 - The Adventure Continues...',
+  sections: {
+    [chapter2.startChapter]: {
+      text: 'Hey welcome back to your adventure.',
+      choices: []
+    }
+  }
+}
+
+export const StoryTree = [ChapterOne, ChapterTwo]
