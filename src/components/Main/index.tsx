@@ -15,7 +15,7 @@ const Main = () => {
     setStorySection('start-chapter')
   }
 
-  const handleChoicesSelect = (choice: any) => {
+  const handleChoices = (choice: any) => {
     if (choice === 'end-chapter') {
       setNextChapter()
     } else {
@@ -23,18 +23,19 @@ const Main = () => {
     }
   }
 
-  console.log(chapter?.sections)
-
   return (
     <div className={styles.container}>
       <h3>{chapter?.['chapterName']}</h3>
       <p>{chapter?.sections[storySection]?.text}</p>
-      {choices &&
-        chapter?.sections[storySection].choices.map((c) => (
-          <button key={c} type="button" onClick={() => handleChoicesSelect(c)}>
-            {c.replaceAll('-', ' ')}
-          </button>
-        ))}
+      {choices?.map((choice) => (
+        <button
+          key={choice}
+          type="button"
+          onClick={() => handleChoices(choice)}
+        >
+          {choice.replaceAll('-', ' ')}
+        </button>
+      ))}
     </div>
   )
 }
