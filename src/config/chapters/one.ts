@@ -1,6 +1,6 @@
-// import { ChapterOneChoices } from './choices'
+import { Chapter, ChapterChoices } from '~/types/story'
 
-export const ChapterOneChoices = {
+export const choices: ChapterChoices = {
   startChapter: 'start-chapter',
   readyToPlay: 'ready-to-play',
   letsPlay: 'lets-play',
@@ -8,25 +8,33 @@ export const ChapterOneChoices = {
   endChapter: 'end-chapter'
 }
 
-export const ChapterOne = {
+export const ChapterOne: Chapter = {
   chapterIndex: 0,
   chapterName: 'Chapter 1 - The Adventure Begins...',
   sections: {
-    [ChapterOneChoices.startChapter]: {
+    [choices.startChapter]: {
       text: 'Hi, welcome to the game',
-      choices: [ChapterOneChoices.readyToPlay]
+      choices: [
+        {
+          event: choices.readyToPlay,
+          text: 'Thanks!'
+        }
+      ]
     },
-    [ChapterOneChoices.readyToPlay]: {
+    [choices.readyToPlay]: {
       text: 'Are you ready to play?',
-      choices: [ChapterOneChoices.letsPlay, ChapterOneChoices.nah]
+      choices: [
+        { event: choices.letsPlay, text: "Let's do it!" },
+        { event: choices.nah, text: "I don't wanna" }
+      ]
     },
-    [ChapterOneChoices.letsPlay]: {
+    [choices.letsPlay]: {
       text: "Then let's begin...",
-      choices: []
+      choices: [{ text: 'Okay!!', event: choices.endChapter }]
     },
-    [ChapterOneChoices.nah]: {
+    [choices.nah]: {
       text: "Oh, that's too bad. Maybe next time.",
-      choices: [ChapterOneChoices.endChapter]
+      choices: [{ event: choices.endChapter, text: 'Next' }]
     }
   }
 }

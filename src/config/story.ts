@@ -1,4 +1,5 @@
+import { Chapter } from '~/types/story'
 import { ChapterOne } from './chapters/one'
 import { ChapterTwo } from './chapters/two'
 
-export const StoryTree = [ChapterOne, ChapterTwo]
+export const StoryTree: Chapter[] = [ChapterOne, ChapterTwo]
