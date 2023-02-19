@@ -10,6 +10,7 @@
     "plugin:react/jsx-runtime"
   ],
   "rules": {
+    "max-len": ["warn", { "code": 100, "ignoreUrls": true }],
     "react/prop-types": 0,
     "react/no-unescaped-entities": 0,
     "react/destructuring-assignment": 0,

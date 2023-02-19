@@ -8,7 +8,7 @@ import SectionText from '~components/SectionText'
 import styles from './storyWizard.module.scss'
 
 const StoryWizard = () => {
-  const [storySection, setStorySection] = useState<string>('start-chapter')
+  const [storySection, setStorySection] = useState<string>('startChapter')
   const [storyChapterIndex, setStoryChapterIndex] = useState<number>(0)
 
   const chapter = StoryTree.find((c) => c.chapterIndex === storyChapterIndex)
@@ -38,6 +38,8 @@ const StoryWizard = () => {
   //   setStoryChapterIndex(chapterIndex)
   //   setStorySection(section)
   // }
+
+  console.log(choices)
 
   return (
     <div className={styles.container}>

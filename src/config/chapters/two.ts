@@ -1,15 +1,15 @@
 import { Chapter, ChapterChoices } from '~/types/story'
 
 export const ChapterTwoChoices: ChapterChoices = {
-  startChapter: 'start-chapter'
+  startChapter: { event: 'start-chapter' }
 }
 
 export const ChapterTwo: Chapter = {
   chapterIndex: 1,
-  chapterName: 'Chapter 2 - The Adventure Continues...',
+  chapterName: 'This section is a work in progress',
   sections: {
-    [ChapterTwoChoices.startChapter]: {
-      text: 'Hey welcome back to your adventure.'
+    [ChapterTwoChoices.startChapter.event]: {
+      text: 'Work in progress...'
     }
   }
 }

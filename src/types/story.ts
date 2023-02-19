@@ -1,5 +1,8 @@
 export interface ChapterChoices {
-  [x: string]: string
+  [x: string]: {
+    event: string | any
+    dependency?: string[]
+  }
 }
 
 export interface Choice {
@@ -8,7 +11,7 @@ export interface Choice {
 }
 
 export interface Section {
-  [x: string]: {
+  [event: string]: {
     text: string
     choices?: Choice[]
   }
