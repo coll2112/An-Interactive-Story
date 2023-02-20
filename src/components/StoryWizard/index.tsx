@@ -23,11 +23,11 @@ const StoryWizard = () => {
 
   const setNextChapterStart = () => {
     setStoryChapterIndex((state) => state + 1)
-    setStorySection('start-chapter')
+    setStorySection('startChapter')
   }
 
   const handleChoices = (choice: ChoiceType) => {
-    if (choice.event === 'end-chapter') {
+    if (choice.event === 'endChapter') {
       setNextChapterStart()
     } else {
       if (choice.dependency) {
