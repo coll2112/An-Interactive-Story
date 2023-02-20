@@ -1,7 +1,7 @@
 import clsx from 'clsx'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { StoryTree } from '~/config/story'
-import { Choice as ChoiceType } from '~/types/story'
+import { Chapter, Choice as ChoiceType } from '~/types/story'
 import ChapterHeading from '~components/ChapterHeading'
 import Choice from '~components/Choice'
 import SectionText from '~components/SectionText'
@@ -11,8 +11,15 @@ import styles from './storyWizard.module.scss'
 const StoryWizard = () => {
   const [storySection, setStorySection] = useState<string>('startChapter')
   const [storyChapterIndex, setStoryChapterIndex] = useState<number>(0)
+  const [chapter, setChapter] = useState<Chapter | undefined>()
 
-  const chapter = StoryTree.find((c) => c.chapterIndex === storyChapterIndex)
+  useEffect(() => {
+    const currentChapter = StoryTree.find(
+      (c) => c.chapterIndex === storyChapterIndex
+    )
+
+    setChapter(currentChapter)
+  }, [storyChapterIndex])
 
   const setNextChapterStart = () => {
     setStoryChapterIndex((state) => state + 1)
@@ -61,8 +68,6 @@ const StoryWizard = () => {
   }
 
   const choices = handleCreateChoices()
-
-  console.log(choices)
 
   return (
     <div className={styles.container}>
