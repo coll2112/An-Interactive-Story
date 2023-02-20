@@ -1,7 +1,7 @@
 import { Chapter, ChapterChoices } from '~/types/story'
 
 export const ChapterTwoChoices: ChapterChoices = {
-  startChapter: { event: 'start-chapter' }
+  startChapter: { event: 'startChapter' }
 }
 
 export const ChapterTwo: Chapter = {

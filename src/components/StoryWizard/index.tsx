@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import { useMemo, useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 import { StoryTree } from '~/config/story'
 import { Chapter, Choice as ChoiceType } from '~/types/story'
 import ChapterHeading from '~components/ChapterHeading'
@@ -29,18 +29,15 @@ const StoryWizard = () => {
     [chapter?.sections[storySection]?.choices]
   )
 
-  const setNextChapterStart = () => {
+  const setNextChapterStart = useCallback(() => {
     setStoryChapterIndex((state) => state + 1)
     setStorySection('startChapter')
-  }
+  }, [])
 
   const handleChoices = (choice: ChoiceType) => {
     if (choice.event === 'endChapter') {
       setNextChapterStart()
     } else {
-      // if (choice.dependency) {
-      //   console.log(chapter?.choiceDependencies)
-      // }
       setStorySection(choice.event)
     }
   }

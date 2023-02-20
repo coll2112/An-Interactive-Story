@@ -25,6 +25,6 @@ export interface Section {
 export interface Chapter {
   chapterIndex: number
   chapterName: string
-  choiceDependencies: Dependencies
+  choiceDependencies?: Dependencies
   sections: Section
 }
