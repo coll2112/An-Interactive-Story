@@ -1,17 +1,20 @@
 @use '~global' as *;
 
 .button {
-  background: none;
-  border: 2px solid gray;
-  border-radius: 0.2rem;
+  background: #627fa2;
+  border: 0.2rem solid #bcc4d8;
+  border-radius: 0.5rem;
   padding: 0.5rem 2rem;
   width: 100%;
-  transition: background-color 0.15s linear;
+  transition: all 0.1s linear;
   font-family: $subText;
   font-size: 1.5rem;
+  max-height: 4rem;
+  color: #bcc4d8;
 
   &:hover {
     cursor: pointer;
-    background-color: darken(white, 5%);
+    background-color: darken(#627fa2, 5%);
+    text-shadow: 0.15rem 0.15rem #169107;
   }
 }

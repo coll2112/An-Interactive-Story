@@ -1,18 +1,23 @@
 @use '~global' as *;
 
 .container {
-  margin-top: 2rem;
-  margin-bottom: 4rem;
   display: flex;
   gap: 2rem;
   justify-content: space-between;
   align-items: center;
+  background-color: #8c5549;
   width: 100%;
+  padding: 0.5rem 1.5rem;
 
   &-buttons {
     display: flex;
     gap: 2rem;
     justify-content: space-between;
     width: 35%;
+  }
+
+  h4 {
+    color: #bcc4d8;
+    margin: 0;
   }
 }

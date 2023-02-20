@@ -45,7 +45,9 @@ const StoryWizard: FunctionComponent = () => {
         setStoryChapterIndex={setStoryChapterIndex}
         storyChapterIndex={storyChapterIndex}
       />
-      <SectionText sectionText={sections?.[activeEvent].text} />
+      <div className={styles['viewport']}>
+        <SectionText sectionText={sections?.[activeEvent]?.text} />
+      </div>
       <div
         className={clsx(
           styles['btn-container'],

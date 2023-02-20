@@ -10,17 +10,38 @@
 }
 
 .btn-container {
-  margin-top: 2rem;
+  width: 100%;
+  background-color: #8c5549;
+  height: 30vh;
+  padding: 3rem;
+  border: 1rem solid darken(#8c5549, 10%);
+  border-top: 0.5rem solid darken(#8c5549, 10%);
 
   &-single-choice {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 1rem;
   }
 
   &-multiple-choice {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
     gap: 1rem;
+  }
+}
+
+.viewport {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 65vh;
+  width: 100%;
+  background-color: #627fa2;
+  border: 1rem solid #bcc4d8;
+  border-bottom: 0.5rem solid #bcc4d8;
+
+  p {
+    color: #bcc4d8;
   }
 }
