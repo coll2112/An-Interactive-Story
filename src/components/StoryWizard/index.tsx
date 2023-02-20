@@ -1,20 +1,24 @@
 import clsx from 'clsx'
-import { useState } from 'react'
+import { FunctionComponent } from 'react'
 import useGetChapter from '~/hooks/useGetChapter'
-import { Choice as ChoiceType } from '~/types/story'
+import { Choice as IChoice } from '~/types/story'
 import ChapterHeading from '~components/ChapterHeading'
 import Choice from '~components/Choice'
 import SectionText from '~components/SectionText'
 
 import styles from './storyWizard.module.scss'
 
-const StoryWizard = () => {
-  const [activeEvent, setActiveEvent] = useState<string>('startChapter')
-  const [storyChapterIndex, setStoryChapterIndex] = useState<number>(0)
-  const { chapter, sections, currentChoices } = useGetChapter(
-    storyChapterIndex,
-    activeEvent
-  )
+const StoryWizard: FunctionComponent = () => {
+  // const [activeEvent, setActiveEvent] = useState<string>('startChapter')
+  // const [storyChapterIndex, setStoryChapterIndex] = useState<number>(0)
+  const {
+    chapter,
+    sections,
+    currentChoices,
+    activeEvent,
+    setActiveEvent,
+    setStoryChapterIndex
+  } = useGetChapter()
 
   console.log(sections)
 
@@ -23,23 +27,13 @@ const StoryWizard = () => {
     setActiveEvent('startChapter')
   }
 
-  const handleChoices = (choice: ChoiceType) => {
+  const handleChoices = (choice: IChoice) => {
     if (choice.event === 'endChapter') {
       setNextChapterStart()
     } else {
       setActiveEvent(choice.event)
     }
   }
-
-  // Created auto load
-  // useEffect(() => {
-  //   if (
-  //     localStorage.getItem('chapter') &&
-  //     localStorage.getItem('story-section')
-  //   ) {
-  //     handleLoadGame()
-  //   }
-  // }, [])
 
   if (!chapter || !sections) {
     return <p>Loading...</p>

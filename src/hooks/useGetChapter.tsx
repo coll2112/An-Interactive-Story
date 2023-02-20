@@ -2,9 +2,12 @@ import { useMemo, useState } from 'react'
 import { StoryTree } from '~/config/story'
 import { Chapter, Choice, Section } from '~/types/story'
 
-const useGetChapter = (storyChapterIndex: number, activeEvent: string) => {
+const useGetChapter = () => {
+  const [activeEvent, setActiveEvent] = useState<string>('startChapter')
+  const [storyChapterIndex, setStoryChapterIndex] = useState<number>(0)
   const [chapter, setChapter] = useState<Chapter | undefined>()
   const [sections, setSections] = useState<Section>()
+  const [currentChoices, setCurrentChoices] = useState<Choice[]>()
 
   useMemo(() => {
     const currentChapter = StoryTree.find(
@@ -18,13 +21,24 @@ const useGetChapter = (storyChapterIndex: number, activeEvent: string) => {
     setSections(chapter?.sections)
   }, [chapter])
 
-  const currentChoices = useMemo(
-    (): Choice[] | undefined =>
-      sections?.[activeEvent]?.choices?.filter((c) => c.dependency !== false),
-    [chapter, sections?.[activeEvent]?.choices]
-  )
+  useMemo(() => {
+    const choices = sections?.[activeEvent]?.choices?.filter(
+      (c) => c.dependency !== false
+    )
 
-  return { chapter, sections, currentChoices }
+    setCurrentChoices(choices)
+    setActiveEvent(activeEvent)
+  }, [chapter, sections, activeEvent])
+
+  return {
+    chapter,
+    sections,
+    currentChoices,
+    activeEvent,
+    storyChapterIndex,
+    setActiveEvent,
+    setStoryChapterIndex
+  }
 }
 
 export default useGetChapter
