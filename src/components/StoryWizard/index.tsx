@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import { useEffect, useState } from 'react'
+import { useMemo, useState } from 'react'
 import { StoryTree } from '~/config/story'
 import { Chapter, Choice as ChoiceType } from '~/types/story'
 import ChapterHeading from '~components/ChapterHeading'
@@ -13,13 +13,21 @@ const StoryWizard = () => {
   const [storyChapterIndex, setStoryChapterIndex] = useState<number>(0)
   const [chapter, setChapter] = useState<Chapter | undefined>()
 
-  useEffect(() => {
+  useMemo(() => {
     const currentChapter = StoryTree.find(
       (c) => c.chapterIndex === storyChapterIndex
     )
 
     setChapter(currentChapter)
   }, [storyChapterIndex])
+
+  const choices = useMemo(
+    (): ChoiceType[] | undefined =>
+      chapter?.sections[storySection]?.choices?.filter(
+        (c) => c.dependency !== false
+      ),
+    [chapter?.sections[storySection]?.choices]
+  )
 
   const setNextChapterStart = () => {
     setStoryChapterIndex((state) => state + 1)
@@ -30,9 +38,9 @@ const StoryWizard = () => {
     if (choice.event === 'endChapter') {
       setNextChapterStart()
     } else {
-      if (choice.dependency) {
-        console.log(chapter?.choiceDependencies)
-      }
+      // if (choice.dependency) {
+      //   console.log(chapter?.choiceDependencies)
+      // }
       setStorySection(choice.event)
     }
   }
@@ -58,16 +66,6 @@ const StoryWizard = () => {
   //     handleLoadGame()
   //   }
   // }, [])
-
-  const handleCreateChoices = (): ChoiceType[] | undefined => {
-    const choices = chapter?.sections[storySection]?.choices?.filter(
-      (c) => c.dependency !== false
-    )
-
-    return choices
-  }
-
-  const choices = handleCreateChoices()
 
   return (
     <div className={styles.container}>
