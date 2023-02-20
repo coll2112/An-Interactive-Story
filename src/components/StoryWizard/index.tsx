@@ -2,25 +2,22 @@ import clsx from 'clsx'
 import { FunctionComponent } from 'react'
 import useGetChapter from '~/hooks/useGetChapter'
 import { Choice as IChoice } from '~/types/story'
-import ChapterHeading from '~components/ChapterHeading'
 import Choice from '~components/Choice'
 import SectionText from '~components/SectionText'
+import TopBar from '~components/TopBar'
 
 import styles from './storyWizard.module.scss'
 
 const StoryWizard: FunctionComponent = () => {
-  // const [activeEvent, setActiveEvent] = useState<string>('startChapter')
-  // const [storyChapterIndex, setStoryChapterIndex] = useState<number>(0)
   const {
     chapter,
     sections,
     currentChoices,
     activeEvent,
+    storyChapterIndex,
     setActiveEvent,
     setStoryChapterIndex
   } = useGetChapter()
-
-  console.log(sections)
 
   const setNextChapterStart = () => {
     setStoryChapterIndex((state) => state + 1)
@@ -41,7 +38,13 @@ const StoryWizard: FunctionComponent = () => {
 
   return (
     <div className={styles.container}>
-      <ChapterHeading chapterHeading={chapter.chapterName} />
+      <TopBar
+        activeEvent={activeEvent}
+        chapterHeading={chapter.chapterName}
+        setActiveEvent={setActiveEvent}
+        setStoryChapterIndex={setStoryChapterIndex}
+        storyChapterIndex={storyChapterIndex}
+      />
       <SectionText sectionText={sections?.[activeEvent].text} />
       <div
         className={clsx(
@@ -59,12 +62,6 @@ const StoryWizard: FunctionComponent = () => {
           />
         ))}
       </div>
-      {/* <Button type="button" onClick={() => handleSaveGame()}>
-        Save Game
-      </Button>
-      <Button type="button" onClick={() => handleLoadGame()}>
-        Load Game
-      </Button> */}
     </div>
   )
 }
