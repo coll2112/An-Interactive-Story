@@ -38,6 +38,8 @@ const StoryWizard: FunctionComponent = () => {
 
   return (
     <div className={styles.container}>
+      {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
+      {/* <audio autoPlay controls loop src="sounds/find-out.mp3" /> */}
       <TopBar
         activeEvent={activeEvent}
         chapterHeading={chapter.chapterName}
