@@ -1,3 +1,5 @@
+import { CSSProperties } from 'react'
+
 export interface ChapterChoices {
   [x: string]: {
     event: string | any
@@ -11,9 +13,9 @@ export interface Choice {
   dependency?: boolean
 }
 
-export interface Dependencies {
-  [x: string]: boolean
-}
+// export interface Dependencies {
+//   [x: string]: boolean
+// }
 
 export interface Section {
   [event: string]: {
@@ -22,10 +24,15 @@ export interface Section {
   }
 }
 
+export interface BackgroundImageStyles {
+  image: string
+  styles?: CSSProperties
+}
+
 export interface Chapter {
   chapterIndex: number
   chapterName: string
-  choiceDependencies?: Dependencies
+  // choiceDependencies?: Dependencies
   sections: Section
-  bgImage?: string
+  background?: BackgroundImageStyles
 }

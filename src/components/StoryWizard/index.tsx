@@ -32,24 +32,28 @@ const StoryWizard: FunctionComponent = () => {
     }
   }
 
+  // TODO Create useGameSave hook for this function
   const handleSaveGame = () => {
     localStorage.setItem('activeEvent', activeEvent)
     localStorage.setItem('storyChapterIndex', JSON.stringify(storyChapterIndex))
   }
 
+  // TODO Create useGameSave hook for this function
   const handleLoadGame = () => {
     const savedActiveEvent = localStorage.getItem('activeEvent') as string
     const savedChapterIndex = Number(localStorage.getItem('storyChapterIndex'))
-    setActiveEvent(savedActiveEvent)
-    setStoryChapterIndex(savedChapterIndex)
+
+    // Only load game when there's a save
+    if (savedActiveEvent) {
+      setActiveEvent(savedActiveEvent)
+      setStoryChapterIndex(savedChapterIndex)
+    }
   }
 
   const backgroundStyles: CSSProperties = {
-    backgroundImage: `url(${chapter?.bgImage})`,
+    backgroundImage: `url(${chapter?.background?.image})`,
     backgroundSize: 'cover',
-    backgroundPosition: 'center',
-    opacity: '0.3',
-    filter: 'grayscale(50%)'
+    ...chapter?.background?.styles
   }
 
   if (!chapter || !sections) {
