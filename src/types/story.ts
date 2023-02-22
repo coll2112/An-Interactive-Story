@@ -27,4 +27,5 @@ export interface Chapter {
   chapterName: string
   choiceDependencies?: Dependencies
   sections: Section
+  bgImage?: string
 }

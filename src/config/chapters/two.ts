@@ -7,6 +7,7 @@ export const ChapterTwoChoices: ChapterChoices = {
 export const ChapterTwo: Chapter = {
   chapterIndex: 1,
   chapterName: 'This section is a work in progress',
+  bgImage: 'https://media.tenor.com/EaJbvOuvPiYAAAAd/pixel-art-pixel.gif',
   sections: {
     [ChapterTwoChoices.startChapter.event]: {
       text: 'Work in progress...'

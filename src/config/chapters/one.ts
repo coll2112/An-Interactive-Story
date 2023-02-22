@@ -21,6 +21,8 @@ export const ChapterOne: Chapter = {
   chapterIndex: 0,
   chapterName: 'Chapter 1: Coffee Time',
   choiceDependencies,
+  bgImage:
+    'https://i.pinimg.com/originals/27/b0/e7/27b0e7421e2feab63a21fadb79f6c9c1.gif',
   sections: {
     [handleEvent('startChapter')]: {
       text: `The sky is the color of ash. The wind hits the old window of

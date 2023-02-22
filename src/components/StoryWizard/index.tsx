@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import { FunctionComponent } from 'react'
+import { CSSProperties, FunctionComponent } from 'react'
 import useGetChapter from '~/hooks/useGetChapter'
 import { Choice as IChoice } from '~/types/story'
 import Choice from '~components/Choice'
@@ -32,6 +32,26 @@ const StoryWizard: FunctionComponent = () => {
     }
   }
 
+  const handleSaveGame = () => {
+    localStorage.setItem('activeEvent', activeEvent)
+    localStorage.setItem('storyChapterIndex', JSON.stringify(storyChapterIndex))
+  }
+
+  const handleLoadGame = () => {
+    const savedActiveEvent = localStorage.getItem('activeEvent') as string
+    const savedChapterIndex = Number(localStorage.getItem('storyChapterIndex'))
+    setActiveEvent(savedActiveEvent)
+    setStoryChapterIndex(savedChapterIndex)
+  }
+
+  const backgroundStyles: CSSProperties = {
+    backgroundImage: `url(${chapter?.bgImage})`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    opacity: '0.3',
+    filter: 'grayscale(50%)'
+  }
+
   if (!chapter || !sections) {
     return <p>Loading...</p>
   }
@@ -41,13 +61,12 @@ const StoryWizard: FunctionComponent = () => {
       {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
       {/* <audio autoPlay controls loop src="sounds/find-out.mp3" /> */}
       <TopBar
-        activeEvent={activeEvent}
         chapterHeading={chapter.chapterName}
-        setActiveEvent={setActiveEvent}
-        setStoryChapterIndex={setStoryChapterIndex}
-        storyChapterIndex={storyChapterIndex}
+        onLoadClick={handleLoadGame}
+        onSaveClick={handleSaveGame}
       />
       <div className={styles['viewport']}>
+        <span className={styles['viewport-bgImage']} style={backgroundStyles} />
         <SectionText sectionText={sections?.[activeEvent]?.text} />
       </div>
       <div
