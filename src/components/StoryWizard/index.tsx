@@ -29,7 +29,9 @@ const StoryWizard: FunctionComponent = () => {
 
   const setNextChapterStart = () => {
     setStoryChapterIndex((state) => state + 1)
+    console.log(storyChapterIndex)
     setActiveEvent('startChapter')
+    console.log('test')
   }
 
   const handleChoices = (choice: IChoice) => {
@@ -37,16 +39,6 @@ const StoryWizard: FunctionComponent = () => {
       setNextChapterStart()
     } else {
       setActiveEvent(choice.event)
-    }
-
-    if (
-      chapter?.choiceDependencies &&
-      choice.event in chapter?.choiceDependencies
-    ) {
-      chapter.choiceDependencies[choice.event] =
-        !chapter.choiceDependencies[choice.event]
-
-      Object.keys(sections as any)
     }
   }
 

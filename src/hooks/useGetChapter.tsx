@@ -25,7 +25,7 @@ const useGetChapter = () => {
     return () => {
       isSubscribed = false
     }
-  }, [chapter?.choiceDependencies])
+  }, [storyChapterIndex])
 
   useMemo(() => {
     setSections(chapter?.sections)

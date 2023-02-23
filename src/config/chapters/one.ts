@@ -98,10 +98,6 @@ export const ChapterOne: Chapter = {
       text: `You wrap up in your nice, warm blanket shielding yourself from
       the cold draft entering through the cracks in this old house`,
       choices: [{ text: 'Next', event: handleEvent('endChapter') }]
-    },
-    [handleEvent('endChapter')]: {
-      text: `It's whatever. The coffee is good, and your body is warm. The
-      wind's bite is cold, so it's better to feel the coffee's bite instead.`
     }
   }
 }
