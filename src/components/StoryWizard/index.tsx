@@ -1,5 +1,6 @@
 import clsx from 'clsx'
 import { CSSProperties, FunctionComponent } from 'react'
+import useGameSave from '~/hooks/useGameSave'
 import useGetChapter from '~/hooks/useGetChapter'
 import { Choice as IChoice } from '~/types/story'
 import Choice from '~components/Choice'
@@ -19,6 +20,13 @@ const StoryWizard: FunctionComponent = () => {
     setStoryChapterIndex
   } = useGetChapter()
 
+  const { saveData, handleSaveGame, handleLoadGame } = useGameSave(
+    activeEvent,
+    storyChapterIndex,
+    setActiveEvent,
+    setStoryChapterIndex
+  )
+
   const setNextChapterStart = () => {
     setStoryChapterIndex((state) => state + 1)
     setActiveEvent('startChapter')
@@ -29,24 +37,6 @@ const StoryWizard: FunctionComponent = () => {
       setNextChapterStart()
     } else {
       setActiveEvent(choice.event)
-    }
-  }
-
-  // TODO Create useGameSave hook for this function
-  const handleSaveGame = () => {
-    localStorage.setItem('activeEvent', activeEvent)
-    localStorage.setItem('storyChapterIndex', JSON.stringify(storyChapterIndex))
-  }
-
-  // TODO Create useGameSave hook for this function
-  const handleLoadGame = () => {
-    const savedActiveEvent = localStorage.getItem('activeEvent') as string
-    const savedChapterIndex = Number(localStorage.getItem('storyChapterIndex'))
-
-    // Only load game when there's a save
-    if (savedActiveEvent) {
-      setActiveEvent(savedActiveEvent)
-      setStoryChapterIndex(savedChapterIndex)
     }
   }
 
@@ -63,9 +53,16 @@ const StoryWizard: FunctionComponent = () => {
   return (
     <div className={styles.container}>
       {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
-      {/* <audio autoPlay controls loop src="sounds/find-out.mp3" /> */}
+      <audio
+        autoPlay
+        controls
+        loop
+        id="audio-player"
+        src="sounds/find-out.mp3"
+      />
       <TopBar
         chapterHeading={chapter.chapterName}
+        hasActiveSave={saveData?.savedActiveEvent !== null}
         onLoadClick={handleLoadGame}
         onSaveClick={handleSaveGame}
       />
