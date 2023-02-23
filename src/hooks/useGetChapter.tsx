@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { StoryTree } from '~/config/story'
 import { Chapter, Choice, Section } from '~/types/story'
 
@@ -6,16 +6,26 @@ const useGetChapter = () => {
   const [activeEvent, setActiveEvent] = useState<string>('startChapter')
   const [storyChapterIndex, setStoryChapterIndex] = useState<number>(0)
   const [chapter, setChapter] = useState<Chapter | undefined>()
-  const [sections, setSections] = useState<Section>()
+  const [sections, setSections] = useState<Section>() || {}
   const [currentChoices, setCurrentChoices] = useState<Choice[]>()
 
-  useMemo(() => {
-    const currentChapter = StoryTree.find(
-      (c) => c.chapterIndex === storyChapterIndex
-    )
+  useEffect(() => {
+    let isSubscribed = true
 
-    setChapter(currentChapter)
-  }, [storyChapterIndex])
+    if (isSubscribed) {
+      const newChapterObj = {} as Chapter
+      const currentChapter = StoryTree.find(
+        (c) => c.chapterIndex === storyChapterIndex
+      )
+
+      Object.assign(newChapterObj, currentChapter)
+      setChapter(newChapterObj)
+    }
+
+    return () => {
+      isSubscribed = false
+    }
+  }, [chapter?.choiceDependencies])
 
   useMemo(() => {
     setSections(chapter?.sections)

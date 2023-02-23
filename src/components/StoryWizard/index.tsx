@@ -38,6 +38,16 @@ const StoryWizard: FunctionComponent = () => {
     } else {
       setActiveEvent(choice.event)
     }
+
+    if (
+      chapter?.choiceDependencies &&
+      choice.event in chapter?.choiceDependencies
+    ) {
+      chapter.choiceDependencies[choice.event] =
+        !chapter.choiceDependencies[choice.event]
+
+      Object.keys(sections as any)
+    }
   }
 
   const backgroundStyles: CSSProperties = {
@@ -53,13 +63,13 @@ const StoryWizard: FunctionComponent = () => {
   return (
     <div className={styles.container}>
       {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
-      <audio
+      {/* <audio
         autoPlay
         controls
         loop
         id="audio-player"
         src="sounds/find-out.mp3"
-      />
+      /> */}
       <TopBar
         chapterHeading={chapter.chapterName}
         hasActiveSave={saveData?.savedActiveEvent !== null}

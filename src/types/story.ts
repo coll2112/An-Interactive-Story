@@ -2,6 +2,7 @@ import { CSSProperties } from 'react'
 
 export interface ChapterChoices {
   [x: string]: {
+    isSelected?: boolean
     event: string | any
     dependency?: string[]
   }
@@ -13,9 +14,9 @@ export interface Choice {
   dependency?: boolean
 }
 
-// export interface Dependencies {
-//   [x: string]: boolean
-// }
+export interface ChoiceDependencies {
+  [x: string]: boolean
+}
 
 export interface Section {
   [event: string]: {
@@ -32,7 +33,7 @@ export interface BackgroundImageStyles {
 export interface Chapter {
   chapterIndex: number
   chapterName: string
-  // choiceDependencies?: Dependencies
+  choiceDependencies?: ChoiceDependencies
   sections: Section
   background?: BackgroundImageStyles
 }

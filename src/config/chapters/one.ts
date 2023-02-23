@@ -20,7 +20,7 @@ const handleEvent = (event: string) => CHOICES[event].event
 export const ChapterOne: Chapter = {
   chapterIndex: 0,
   chapterName: 'Chapter 1: Coffee Time',
-  // choiceDependencies,
+  choiceDependencies,
   background: {
     image:
       'https://i.pinimg.com/originals/27/b0/e7/27b0e7421e2feab63a21fadb79f6c9c1.gif',
