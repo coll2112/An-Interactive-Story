@@ -32,9 +32,7 @@ const useGetChapter = () => {
   }, [chapter])
 
   useMemo(() => {
-    const choices = sections?.[activeEvent]?.choices?.filter(
-      (c) => c.dependency !== false
-    )
+    const choices = sections?.[activeEvent]?.choices
 
     setCurrentChoices(choices)
     setActiveEvent(activeEvent)

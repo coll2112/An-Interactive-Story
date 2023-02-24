@@ -1,26 +1,21 @@
 import { Chapter, ChapterChoices } from '~/types/story'
 
 const CHOICES: ChapterChoices = {
-  startChapter: { event: 'startChapter' },
-  takeBlanket: { event: 'takeBlanket' },
-  lineTwo: { event: 'lineOne' },
-  drinkCoffee: { event: 'drinkCoffee' },
-  ignoreCoffee: { event: 'ignoreCoffee' },
-  coverUpWithBlanket: { event: 'coverUpWithBlanket' },
-  endChapter: { event: 'endChapter' }
-}
-
-const choiceDependencies = {
-  hasTakenBlanket: false
+  startChapter: 'startChapter',
+  takeBlanket: 'takeBlanket',
+  lineTwo: 'lineOne',
+  drinkCoffee: 'drinkCoffee',
+  ignoreCoffee: 'ignoreCoffee',
+  coverUpWithBlanket: 'coverUpWithBlanket',
+  endChapter: 'endChapter'
 }
 
 /** Returns the event of the choice passed in. */
-const handleEvent = (event: string) => CHOICES[event].event
+const handleEvent = (event: string) => CHOICES[event]
 
 export const ChapterOne: Chapter = {
   chapterIndex: 0,
   chapterName: 'Chapter 1: Coffee Time',
-  choiceDependencies,
   background: {
     image:
       'https://i.pinimg.com/originals/27/b0/e7/27b0e7421e2feab63a21fadb79f6c9c1.gif',
@@ -89,8 +84,7 @@ export const ChapterOne: Chapter = {
         { text: 'Next', event: handleEvent('endChapter') },
         {
           text: 'Cover Up With Blanket',
-          event: handleEvent('coverUpWithBlanket'),
-          dependency: choiceDependencies.hasTakenBlanket
+          event: handleEvent('coverUpWithBlanket')
         }
       ]
     },
