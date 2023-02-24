@@ -22,8 +22,8 @@ export interface BackgroundImageStyles {
 }
 
 export interface Chapter {
-  chapterIndex: number
-  chapterName: string
+  index: number
+  name: string
   sections: Section
   background?: BackgroundImageStyles
 }

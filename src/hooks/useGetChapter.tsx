@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import { StoryTree } from '~/config/story'
+import { Chapters } from '~/config/story'
 import { Chapter, Choice, Section } from '~/types/story'
 
 const useGetChapter = () => {
@@ -14,9 +14,8 @@ const useGetChapter = () => {
 
     if (isSubscribed) {
       const newChapterObj = {} as Chapter
-      const currentChapter = StoryTree.find(
-        (c) => c.chapterIndex === storyChapterIndex
-      )
+      // eslint-disable-next-line prettier/prettier
+      const currentChapter = Chapters.find((c) => c.index === storyChapterIndex)
 
       Object.assign(newChapterObj, currentChapter)
       setChapter(newChapterObj)

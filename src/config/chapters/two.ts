@@ -1,12 +1,12 @@
 import { Chapter, ChapterChoices } from '~/types/story'
 
 export const ChapterTwoChoices: ChapterChoices = {
-  startChapter: { event: 'startChapter' }
+  startChapter: 'startChapter'
 }
 
 export const ChapterTwo: Chapter = {
-  chapterIndex: 1,
-  chapterName: 'This section is a work in progress',
+  index: 1,
+  name: 'This section is a work in progress',
   background: {
     image: 'https://media.tenor.com/EaJbvOuvPiYAAAAd/pixel-art-pixel.gif',
     styles: {
@@ -15,7 +15,7 @@ export const ChapterTwo: Chapter = {
     }
   },
   sections: {
-    [ChapterTwoChoices.startChapter.event]: {
+    [ChapterTwoChoices.startChapter]: {
       text: 'Work in progress...'
     }
   }

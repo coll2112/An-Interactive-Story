@@ -2,11 +2,9 @@ import { Chapter, ChapterChoices } from '~/types/story'
 
 const CHOICES: ChapterChoices = {
   startChapter: 'startChapter',
-  takeBlanket: 'takeBlanket',
   lineTwo: 'lineOne',
   drinkCoffee: 'drinkCoffee',
   ignoreCoffee: 'ignoreCoffee',
-  coverUpWithBlanket: 'coverUpWithBlanket',
   endChapter: 'endChapter'
 }
 
@@ -14,8 +12,8 @@ const CHOICES: ChapterChoices = {
 const handleEvent = (event: string) => CHOICES[event]
 
 export const ChapterOne: Chapter = {
-  chapterIndex: 0,
-  chapterName: 'Chapter 1: Coffee Time',
+  index: 0,
+  name: 'Chapter 1: Coffee Time',
   background: {
     image:
       'https://i.pinimg.com/originals/27/b0/e7/27b0e7421e2feab63a21fadb79f6c9c1.gif',
@@ -31,21 +29,6 @@ export const ChapterOne: Chapter = {
       text: `The sky is the color of ash. The wind hits the old window of
       your home, rattling it as if someone just launched a cannon right next to
       you. The cold draft seeps underneath the doorway.`,
-      choices: [
-        {
-          text: 'Next',
-          event: handleEvent('lineTwo')
-        },
-        {
-          text: 'Take the extra blanket from the couch',
-          event: handleEvent('takeBlanket')
-        }
-      ]
-    },
-    [handleEvent('takeBlanket')]: {
-      text: `Standing up, your feet quickly hit the bitter, cold floor as you
-      dash across the room to grab the spare blanket. Just as quickly as before,
-      you dart back to seat you were sitting in, still warm from before.`,
       choices: [
         {
           text: 'Next',
@@ -80,17 +63,6 @@ export const ChapterOne: Chapter = {
     [handleEvent('drinkCoffee')]: {
       text: `The hot coffee hits your lip. You flinch to the sudden, bitter, bite it leaves on
       your tongue. Perhaps you should have let it cool off more...`,
-      choices: [
-        { text: 'Next', event: handleEvent('endChapter') },
-        {
-          text: 'Cover Up With Blanket',
-          event: handleEvent('coverUpWithBlanket')
-        }
-      ]
-    },
-    [handleEvent('coverUpWithBlanket')]: {
-      text: `You wrap up in your nice, warm blanket shielding yourself from
-      the cold draft entering through the cracks in this old house`,
       choices: [{ text: 'Next', event: handleEvent('endChapter') }]
     }
   }

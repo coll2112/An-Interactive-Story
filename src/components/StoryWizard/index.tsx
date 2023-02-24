@@ -61,7 +61,7 @@ const StoryWizard: FunctionComponent = () => {
         src="sounds/find-out.mp3"
       /> */}
       <TopBar
-        chapterHeading={chapter.chapterName}
+        chapterHeading={chapter.name}
         hasActiveSave={saveData?.savedActiveEvent !== null}
         onLoadClick={handleLoadGame}
         onSaveClick={handleSaveGame}
