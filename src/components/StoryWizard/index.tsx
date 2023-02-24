@@ -69,22 +69,22 @@ const StoryWizard: FunctionComponent = () => {
       <div className={styles['viewport']}>
         <span className={styles['viewport-bgImage']} style={backgroundStyles} />
         <SectionText sectionText={sections?.[activeEvent]?.text} />
-      </div>
-      <div
-        className={clsx(
-          styles['btn-container'],
-          currentChoices && currentChoices.length <= 1
-            ? styles['btn-container-single-choice']
-            : styles['btn-container-multiple-choice']
-        )}
-      >
-        {currentChoices?.map((choice) => (
-          <Choice
-            key={choice.event}
-            choice={choice}
-            onClick={() => handleChoices(choice)}
-          />
-        ))}
+        <div
+          className={clsx(
+            styles['btn-container'],
+            currentChoices && currentChoices.length <= 1
+              ? styles['btn-container-single-choice']
+              : styles['btn-container-multiple-choice']
+          )}
+        >
+          {currentChoices?.map((choice) => (
+            <Choice
+              key={choice.event}
+              choice={choice}
+              onClick={() => handleChoices(choice)}
+            />
+          ))}
+        </div>
       </div>
     </div>
   )

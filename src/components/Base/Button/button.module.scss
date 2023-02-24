@@ -1,11 +1,11 @@
 @use 'global' as *;
 
 .button {
-  background: #627fa2;
-  border: 0.2rem solid #bcc4d8;
+  background: none;
+  border: none;
   border-radius: 0.5rem;
-  padding: 0.5rem 2rem;
-  width: 100%;
+  padding-top: 0.3rem;
+  padding-bottom: 0.3rem;
   transition: all 0.1s linear;
   font-family: $subText;
   font-size: 1.5rem;
@@ -13,7 +13,6 @@
 
   &:hover {
     cursor: pointer;
-    background-color: darken(#627fa2, 5%);
-    text-shadow: 0.15rem 0.15rem #169107;
+    text-shadow: 0.15rem 0.15rem rgba(0, 0, 0, 0.487);
   }
 }

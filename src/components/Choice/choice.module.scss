@@ -1,17 +1,1 @@
 @use 'global' as *;
-
-.choice-btn {
-  background: none;
-  border: 2px solid gray;
-  border-radius: 0.2rem;
-  padding: 0.5rem 2rem;
-  width: 100%;
-  transition: background-color 0.15s linear;
-  font-family: $subText;
-  font-size: 1.5rem;
-
-  &:hover {
-    cursor: pointer;
-    background-color: darken(white, 5%);
-  }
-}
