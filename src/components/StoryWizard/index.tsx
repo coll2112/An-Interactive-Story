@@ -60,14 +60,15 @@ const StoryWizard: FunctionComponent = () => {
         id="audio-player"
         src="sounds/find-out.mp3"
       /> */}
-      <TopBar
-        chapterHeading={chapter.name}
-        hasActiveSave={saveData?.savedActiveEvent !== null}
-        onLoadClick={handleLoadGame}
-        onSaveClick={handleSaveGame}
-      />
+
       <div className={styles['viewport']}>
         <span className={styles['viewport-bgImage']} style={backgroundStyles} />
+        <TopBar
+          chapterHeading={chapter.name}
+          hasActiveSave={saveData?.savedActiveEvent !== null}
+          onLoadClick={handleLoadGame}
+          onSaveClick={handleSaveGame}
+        />
         <SectionText sectionText={sections?.[activeEvent]?.text} />
         <div
           className={clsx(
