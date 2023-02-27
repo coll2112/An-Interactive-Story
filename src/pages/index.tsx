@@ -1,5 +1,5 @@
-import StoryWizard from '~components/StoryWizard'
+import TitleScreen from '~components/TitleScreen'
 
-const Home = () => <StoryWizard />
+const Home = () => <TitleScreen />
 
 export default Home
