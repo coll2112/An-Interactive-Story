@@ -22,7 +22,8 @@ export const ChapterOne: Chapter = {
       backgroundPosition: 'center',
       opacity: '0.3',
       filter: 'grayscale(50%)'
-    }
+    },
+    music: 'sounds/find-out.mp3'
   },
   sections: {
     [handleEvent('startChapter')]: {

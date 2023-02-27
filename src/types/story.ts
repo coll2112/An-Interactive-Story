@@ -16,8 +16,9 @@ export interface Section {
   }
 }
 
-export interface BackgroundImageStyles {
+export interface BackgroundOptions {
   image: string
+  music?: string
   styles?: CSSProperties
 }
 
@@ -25,5 +26,5 @@ export interface Chapter {
   index: number
   name: string
   sections: Section
-  background?: BackgroundImageStyles
+  background?: BackgroundOptions
 }

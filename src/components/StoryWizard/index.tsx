@@ -27,14 +27,14 @@ const StoryWizard: FunctionComponent = () => {
     setStoryChapterIndex
   )
 
-  const setNextChapterStart = () => {
-    setStoryChapterIndex((state) => state + 1)
-    setActiveEvent('startChapter')
-  }
-
   const handleChoices = (choice: IChoice) => {
+    const buttonClickSoundEffect = new Audio('sounds/button-click.mp3')
+    buttonClickSoundEffect.volume = 0.3
+    void buttonClickSoundEffect.play()
+
     if (choice.event === 'endChapter') {
-      setNextChapterStart()
+      setStoryChapterIndex((state) => state + 1)
+      setActiveEvent('startChapter')
     } else {
       setActiveEvent(choice.event)
     }
