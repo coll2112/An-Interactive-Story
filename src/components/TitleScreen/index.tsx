@@ -14,7 +14,15 @@ const TitleScreen = () => {
         features may not yet work. If you're cool with this, then click the
         button below and start your adventure.
       </p>
-      <Button onClick={() => router.push('game')}>Confirm & Continue</Button>
+      <Button
+        onClick={() => {
+          void router.push('game')
+          // eslint-disable-next-line no-new
+          new Audio()
+        }}
+      >
+        Confirm & Continue
+      </Button>
     </div>
   )
 }
