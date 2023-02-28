@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import { CSSProperties, FunctionComponent } from 'react'
+import { useChapterProvider } from '~/contexts/chapter'
 import useGameSave from '~/hooks/useGameSave'
-import useGetChapter from '~/hooks/useGetChapter'
 import { Choice as IChoice } from '~/types/story'
 import Choice from '~components/Choice'
 import SectionText from '~components/SectionText'
@@ -15,17 +15,11 @@ const StoryWizard: FunctionComponent = () => {
     sections,
     currentChoices,
     activeEvent,
-    storyChapterIndex,
     setActiveEvent,
     setStoryChapterIndex
-  } = useGetChapter()
+  } = useChapterProvider()
 
-  const { saveData, handleSaveGame, handleLoadGame } = useGameSave(
-    activeEvent,
-    storyChapterIndex,
-    setActiveEvent,
-    setStoryChapterIndex
-  )
+  const { saveData, handleSaveGame, handleLoadGame } = useGameSave()
 
   const handleChoices = (choice: IChoice) => {
     const buttonClickSoundEffect = new Audio('sounds/button-click.mp3')
@@ -33,7 +27,7 @@ const StoryWizard: FunctionComponent = () => {
     void buttonClickSoundEffect.play()
 
     if (choice.event === 'endChapter') {
-      setStoryChapterIndex((state) => state + 1)
+      setStoryChapterIndex((state: number) => state + 1)
       setActiveEvent('startChapter')
     } else {
       setActiveEvent(choice.event)

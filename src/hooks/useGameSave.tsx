@@ -1,11 +1,14 @@
-import { Dispatch, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useChapterProvider } from '~/contexts/chapter'
 
-const useGameSave = (
-  activeEvent: string,
-  storyChapterIndex: number,
-  setActiveEvent: Dispatch<string>,
-  setStoryChapterIndex: Dispatch<number>
-) => {
+const useGameSave = () => {
+  const {
+    activeEvent,
+    storyChapterIndex,
+    setStoryChapterIndex,
+    setActiveEvent
+  } = useChapterProvider()
+
   const [saveData, setSaveData] = useState<{
     savedActiveEvent: string
     savedChapterIndex: number

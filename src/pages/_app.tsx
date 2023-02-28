@@ -1,3 +1,4 @@
+import ChapterProvider from '~/contexts/chapter'
 import Layout from '~layout/layout'
 
 // import global styles
@@ -5,9 +6,11 @@ import '~styles/main.scss'
 
 function MyApp({ Component, pageProps }) {
   return (
-    <Layout>
-      <Component {...pageProps} />
-    </Layout>
+    <ChapterProvider>
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
+    </ChapterProvider>
   )
 }
 
