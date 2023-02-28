@@ -1,7 +1,6 @@
 import clsx from 'clsx'
 import { CSSProperties, FunctionComponent } from 'react'
 import { useChapterProvider } from '~/contexts/chapter'
-import useGameSave from '~/hooks/useGameSave'
 import { Choice as IChoice } from '~/types/story'
 import Choice from '~components/Choice'
 import SectionText from '~components/SectionText'
@@ -18,8 +17,6 @@ const StoryWizard: FunctionComponent = () => {
     setActiveEvent,
     setStoryChapterIndex
   } = useChapterProvider()
-
-  const { saveData, handleSaveGame, handleLoadGame } = useGameSave()
 
   const handleChoices = (choice: IChoice) => {
     const buttonClickSoundEffect = new Audio('sounds/button-click.mp3')
@@ -46,22 +43,11 @@ const StoryWizard: FunctionComponent = () => {
 
   return (
     <div className={styles.container}>
-      {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
-      {/* <audio
-        autoPlay
-        controls
-        loop
-        id="audio-player"
-        src="sounds/find-out.mp3"
-      /> */}
-
       <div className={styles['viewport']}>
         <span className={styles['viewport-bgImage']} style={backgroundStyles} />
         <TopBar
           chapterHeading={chapter.name}
-          hasActiveSave={saveData?.savedActiveEvent !== null}
-          onLoadClick={handleLoadGame}
-          onSaveClick={handleSaveGame}
+          chapterMusic={chapter?.background?.music}
         />
         <SectionText sectionText={sections?.[activeEvent]?.text} />
         <div
