@@ -6,10 +6,9 @@ import styles from './topBar.module.scss'
 
 interface Props {
   chapterHeading: string
-  chapterMusic: string
 }
 
-const TopBar = ({ chapterHeading, chapterMusic }: Props) => {
+const TopBar = ({ chapterHeading }: Props) => {
   const { saveData, handleSaveGame, handleLoadGame } = useGameSave()
 
   return (
