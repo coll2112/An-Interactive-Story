@@ -1,5 +1,3 @@
-import clsx from 'clsx'
-import { useEffect, useState } from 'react'
 import { useGameOptionsProvider } from '~/contexts/game-options'
 import useGameSave from '~/hooks/useGameSave'
 import Button from '~components/Base/Button'
@@ -12,33 +10,13 @@ interface Props {
 }
 
 const TopBar = ({ chapterHeading }: Props) => {
-  const {
-    isAudioPlaying,
-    bgMusic,
-    isMuted,
-    setIsAudioPlaying,
-    handleMute,
-    handlePlay,
-    handleStop
-  } = useGameOptionsProvider()
   const { saveData, handleSaveGame, handleLoadGame } = useGameSave()
-  const [showOptionsOverlay, setShowOptionsOverlay] = useState(false)
-
-  const handleToggleAudio = (): void => {
-    if (isAudioPlaying) {
-      handleStop()
-      setIsAudioPlaying(false)
-    } else {
-      handlePlay()
-      setIsAudioPlaying(true)
-    }
-  }
+  const { setToggleOptionsOverlay, toggleOptionsOverlay } =
+    useGameOptionsProvider()
 
   const handleOptionsOverlay = (): void => {
-    setShowOptionsOverlay(!showOptionsOverlay)
+    setToggleOptionsOverlay(!toggleOptionsOverlay)
   }
-
-  console.log(bgMusic)
 
   return (
     <div className={styles.container}>
@@ -57,28 +35,6 @@ const TopBar = ({ chapterHeading }: Props) => {
         <Button type="button" onClick={handleOptionsOverlay}>
           Options
         </Button>
-      </div>
-      {/* TODO: create options-overlay component */}
-      <div
-        className={clsx(
-          styles['options-overlay'],
-          !showOptionsOverlay && styles['options-overlay-hide']
-        )}
-      >
-        <div className={styles['options-overlay-content']}>
-          <div className={styles.option}>
-            <Button type="button" onClick={handleToggleAudio}>
-              Toggle Audio
-            </Button>
-            <p>{isAudioPlaying ? 'On' : 'Off'}</p>
-          </div>
-          <div className={styles.option}>
-            <Button type="button" onClick={handleMute}>
-              Mute Audio
-            </Button>
-            <p>{isMuted ? 'On' : 'Off'}</p>
-          </div>
-        </div>
       </div>
     </div>
   )

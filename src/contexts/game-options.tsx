@@ -8,6 +8,7 @@ const GameOptionsProvider = ({ children }) => {
   const [bgMusic, setBgMusic] = useState<HTMLAudioElement>()
   const [isAudioPlaying, setIsAudioPlaying] = useState(false)
   const [isMuted, setIsMuted] = useState(false)
+  const [toggleOptionsOverlay, setToggleOptionsOverlay] = useState(false)
 
   useEffect(() => {
     setBgMusic(new Audio(chapter?.background?.music))
@@ -36,7 +37,9 @@ const GameOptionsProvider = ({ children }) => {
     isAudioPlaying,
     bgMusic,
     isMuted,
+    toggleOptionsOverlay,
     setIsAudioPlaying,
+    setToggleOptionsOverlay,
     handleMute,
     handlePlay,
     handleStop
