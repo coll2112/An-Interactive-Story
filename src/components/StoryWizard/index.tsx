@@ -45,10 +45,7 @@ const StoryWizard: FunctionComponent = () => {
     <div className={styles.container}>
       <div className={styles['viewport']}>
         <span className={styles['viewport-bgImage']} style={backgroundStyles} />
-        <TopBar
-          chapterHeading={chapter.name}
-          chapterMusic={chapter?.background?.music}
-        />
+        <TopBar chapterHeading={chapter.name} />
         <SectionText sectionText={sections?.[activeEvent]?.text} />
         <div
           className={clsx(

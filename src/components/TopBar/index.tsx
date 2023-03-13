@@ -1,5 +1,6 @@
 import clsx from 'clsx'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useGameOptionsProvider } from '~/contexts/game-options'
 import useGameSave from '~/hooks/useGameSave'
 import Button from '~components/Base/Button'
 import ChapterHeading from '~components/ChapterHeading'
@@ -8,27 +9,47 @@ import styles from './topBar.module.scss'
 
 interface Props {
   chapterHeading: string
-  chapterMusic: string
+  // chapterMusic: string
 }
 
-const TopBar = ({ chapterHeading, chapterMusic }: Props) => {
+const TopBar = ({ chapterHeading }: Props) => {
+  const {
+    isAudioPlaying,
+    setIsAudioPlaying,
+    bgMusic,
+    // handleMute,
+    handlePlay,
+    handleStop
+  } = useGameOptionsProvider()
   const { saveData, handleSaveGame, handleLoadGame } = useGameSave()
-  const [isAudioPlaying, setIsAudioPlaying] = useState(false)
   const [showOptionsOverlay, setShowOptionsOverlay] = useState(false)
 
   const handleToggleAudio = (): void => {
-    setIsAudioPlaying(!isAudioPlaying)
+    // handleMute()
+    if (isAudioPlaying) {
+      handleStop()
+      setIsAudioPlaying(false)
+    } else {
+      handlePlay()
+      setIsAudioPlaying(true)
+    }
   }
 
   const handleOptionsOverlay = (): void => {
     setShowOptionsOverlay(!showOptionsOverlay)
   }
 
+  useEffect(() => {
+    handlePlay()
+  }, [bgMusic])
+
+  console.log(bgMusic)
+
   return (
     <div className={styles.container}>
       <ChapterHeading chapterHeading={chapterHeading} />
       {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
-      <audio controls loop src={chapterMusic} />
+      {/* <audio autoPlay controls loop src={bgMusic} /> */}
       <div className={styles['container-buttons']}>
         <Button type="button" onClick={handleSaveGame}>
           Save Game
@@ -44,6 +65,7 @@ const TopBar = ({ chapterHeading, chapterMusic }: Props) => {
           Options
         </Button>
       </div>
+      {/* TODO: create options-overlay component */}
       <div
         className={clsx(
           styles['options-overlay'],
