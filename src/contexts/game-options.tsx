@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from 'react'
+import { createContext, useContext, useEffect, useMemo, useState } from 'react'
 import { useChapterProvider } from './chapter'
 
 const GameOptionsContext = createContext<any>(undefined)
@@ -12,18 +12,21 @@ const GameOptionsProvider = ({ children }) => {
   const [audioLevel, setAudioLevel] = useState<number>()
 
   useEffect(() => {
-    if (chapter?.background?.music) {
-      setBgMusic(new Audio(chapter.background.music))
-    } else {
-      setBgMusic(new Audio(''))
-      void bgMusic?.pause()
-    }
+    void bgMusic?.load()
+    const audio = new Audio(chapter?.background?.music)
+    setBgMusic(audio)
+  }, [chapter])
 
+  useMemo(() => {
     if (bgMusic) {
       bgMusic.loop = true
+      bgMusic.src = chapter.background.music
       setAudioLevel(bgMusic.volume)
+
+      // This will throw error in Chrome
+      void bgMusic.play()
     }
-  }, [chapter])
+  }, [bgMusic])
 
   const handleMute = (): void => {
     if (!bgMusic) return

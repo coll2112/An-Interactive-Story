@@ -9,6 +9,7 @@ export const ChapterTwo: Chapter = {
   name: 'This section is a work in progress',
   background: {
     image: 'https://media.tenor.com/EaJbvOuvPiYAAAAd/pixel-art-pixel.gif',
+    music: 'sounds/fragment-of-tomorrow.mp3',
     styles: {
       backgroundPosition: 'center',
       opacity: '0.6'
