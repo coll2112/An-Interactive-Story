@@ -1,3 +1,7 @@
 // SCSS Imports
 @use '~styles/base/normalize.scss';
-@use 'global';
+@use 'global' as *;
+
+* {
+  font-family: $subText;
+}
