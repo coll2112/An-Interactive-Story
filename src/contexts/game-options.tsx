@@ -9,9 +9,20 @@ const GameOptionsProvider = ({ children }) => {
   const [isAudioPlaying, setIsAudioPlaying] = useState(false)
   const [isMuted, setIsMuted] = useState(false)
   const [toggleOptionsOverlay, setToggleOptionsOverlay] = useState(false)
+  const [audioLevel, setAudioLevel] = useState<number>()
 
   useEffect(() => {
-    setBgMusic(new Audio(chapter?.background?.music))
+    if (chapter?.background?.music) {
+      setBgMusic(new Audio(chapter.background.music))
+    } else {
+      setBgMusic(new Audio(''))
+      void bgMusic?.pause()
+    }
+
+    if (bgMusic) {
+      bgMusic.loop = true
+      setAudioLevel(bgMusic.volume)
+    }
   }, [chapter])
 
   const handleMute = (): void => {
@@ -33,13 +44,32 @@ const GameOptionsProvider = ({ children }) => {
     setIsAudioPlaying(false)
   }
 
+  const handleAudioLevel = (volumeSet: 'increase' | 'decrease'): void => {
+    if (!bgMusic) return
+
+    switch (volumeSet) {
+      case 'increase':
+        if (bgMusic.volume >= 1) break
+        bgMusic.volume += 0.25
+        break
+      case 'decrease':
+        if (bgMusic.volume <= 0) break
+        bgMusic.volume -= 0.25
+        break
+      default:
+        break
+    }
+
+    setAudioLevel(bgMusic.volume)
+  }
+
   const currentGameOptions = {
     isAudioPlaying,
-    bgMusic,
     isMuted,
     toggleOptionsOverlay,
-    setIsAudioPlaying,
+    audioLevel,
     setToggleOptionsOverlay,
+    handleAudioLevel,
     handleMute,
     handlePlay,
     handleStop
