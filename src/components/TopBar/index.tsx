@@ -9,15 +9,15 @@ import styles from './topBar.module.scss'
 
 interface Props {
   chapterHeading: string
-  // chapterMusic: string
 }
 
 const TopBar = ({ chapterHeading }: Props) => {
   const {
     isAudioPlaying,
-    setIsAudioPlaying,
     bgMusic,
-    // handleMute,
+    isMuted,
+    setIsAudioPlaying,
+    handleMute,
     handlePlay,
     handleStop
   } = useGameOptionsProvider()
@@ -25,7 +25,6 @@ const TopBar = ({ chapterHeading }: Props) => {
   const [showOptionsOverlay, setShowOptionsOverlay] = useState(false)
 
   const handleToggleAudio = (): void => {
-    // handleMute()
     if (isAudioPlaying) {
       handleStop()
       setIsAudioPlaying(false)
@@ -39,17 +38,11 @@ const TopBar = ({ chapterHeading }: Props) => {
     setShowOptionsOverlay(!showOptionsOverlay)
   }
 
-  useEffect(() => {
-    handlePlay()
-  }, [bgMusic])
-
   console.log(bgMusic)
 
   return (
     <div className={styles.container}>
       <ChapterHeading chapterHeading={chapterHeading} />
-      {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
-      {/* <audio autoPlay controls loop src={bgMusic} /> */}
       <div className={styles['container-buttons']}>
         <Button type="button" onClick={handleSaveGame}>
           Save Game
@@ -78,6 +71,12 @@ const TopBar = ({ chapterHeading }: Props) => {
               Toggle Audio
             </Button>
             <p>{isAudioPlaying ? 'On' : 'Off'}</p>
+          </div>
+          <div className={styles.option}>
+            <Button type="button" onClick={handleMute}>
+              Mute Audio
+            </Button>
+            <p>{isMuted ? 'On' : 'Off'}</p>
           </div>
         </div>
       </div>
