@@ -17,8 +17,6 @@ const TitleScreen = () => {
       <Button
         onClick={() => {
           void router.push('game')
-          // eslint-disable-next-line no-new
-          new Audio()
         }}
       >
         Confirm & Continue

@@ -21,10 +21,13 @@ const GameOptionsProvider = ({ children }) => {
     if (bgMusic) {
       bgMusic.loop = true
       bgMusic.src = chapter.background.music
+      bgMusic.volume = 0.5
       setAudioLevel(bgMusic.volume)
 
       // This will throw error in Chrome
-      void bgMusic.play()
+      void bgMusic.play().then(() => {
+        setIsAudioPlaying(true)
+      })
     }
   }, [bgMusic])
 
