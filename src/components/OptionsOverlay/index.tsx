@@ -36,22 +36,28 @@ const OptionsOverlay = () => {
         <p className={styles['options-overlay-header']}>Options</p>
         <div className={styles.option}>
           <Button type="button" onClick={handleToggleAudio}>
-            Toggle Audio
+            {!isAudioPlaying ? 'Play' : 'Stop'} BG Music
           </Button>
-          <p>{isAudioPlaying ? 'On' : 'Off'}</p>
         </div>
         <div className={styles.option}>
-          <Button type="button" onClick={handleMute}>
-            Mute Audio
+          <Button disabled={!isAudioPlaying} type="button" onClick={handleMute}>
+            {!isMuted ? 'Mute' : 'Unmute'} Audio
           </Button>
-          <p>{isMuted ? 'On' : 'Off'}</p>
         </div>
         <div className={styles.option}>
-          <Button type="button" onClick={() => handleAudioLevel('decrease')}>
+          <Button
+            disabled={!isAudioPlaying}
+            type="button"
+            onClick={() => handleAudioLevel('decrease')}
+          >
             Volume -
           </Button>
           <p>{audioLevel * 100}</p>
-          <Button type="button" onClick={() => handleAudioLevel('increase')}>
+          <Button
+            disabled={!isAudioPlaying}
+            type="button"
+            onClick={() => handleAudioLevel('increase')}
+          >
             Volume +
           </Button>
         </div>

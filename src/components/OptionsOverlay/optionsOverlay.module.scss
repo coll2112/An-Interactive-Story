@@ -43,10 +43,15 @@
     justify-content: center;
 
     p {
-      min-width: 3rem;
+      min-width: 10rem;
       text-align: center;
       margin: auto 1rem !important;
     }
+  }
+
+  button {
+    border: 0.1rem solid #bcc4d8;
+    width: 100%;
   }
 
   p {
