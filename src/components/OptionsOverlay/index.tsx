@@ -8,10 +8,12 @@ const OptionsOverlay = () => {
   const {
     isAudioPlaying,
     isMuted,
+    isSfxMuted,
     toggleOptionsOverlay,
     audioLevel,
     handleAudioLevel,
     handleMute,
+    handleMuteSFX,
     handlePlay,
     handleStop
   } = useGameOptionsProvider()
@@ -41,7 +43,12 @@ const OptionsOverlay = () => {
         </div>
         <div className={styles.option}>
           <Button disabled={!isAudioPlaying} type="button" onClick={handleMute}>
-            {!isMuted ? 'Mute' : 'Unmute'} Audio
+            {!isMuted ? 'Mute' : 'Unmute'} BG Audio
+          </Button>
+        </div>
+        <div className={styles.option}>
+          <Button type="button" onClick={handleMuteSFX}>
+            {!isSfxMuted ? 'Mute' : 'Unmute'} SFX
           </Button>
         </div>
         <div className={styles.option}>

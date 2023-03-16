@@ -6,15 +6,20 @@ const GameOptionsContext = createContext<any>(undefined)
 const GameOptionsProvider = ({ children }) => {
   const { chapter } = useChapterProvider()
   const [bgMusic, setBgMusic] = useState<HTMLAudioElement>()
+  const [sfx, setSfx] = useState<HTMLAudioElement>()
   const [isAudioPlaying, setIsAudioPlaying] = useState(false)
   const [isMuted, setIsMuted] = useState(false)
+  const [isSfxMuted, setIsSfxMuted] = useState(false)
   const [toggleOptionsOverlay, setToggleOptionsOverlay] = useState(false)
   const [audioLevel, setAudioLevel] = useState<number>()
 
   useEffect(() => {
     void bgMusic?.load()
-    const audio = new Audio(chapter?.background?.music)
-    setBgMusic(audio)
+    const bgAudio = new Audio(chapter?.background?.music)
+    const buttonClickSoundEffect = new Audio('sounds/button-click.mp3')
+
+    setBgMusic(bgAudio)
+    setSfx(buttonClickSoundEffect)
   }, [chapter])
 
   useMemo(() => {
@@ -50,6 +55,12 @@ const GameOptionsProvider = ({ children }) => {
     setIsAudioPlaying(false)
   }
 
+  const handleMuteSFX = () => {
+    if (!sfx) return
+    sfx.muted = !sfx.muted
+    setIsSfxMuted(sfx.muted)
+  }
+
   const handleAudioLevel = (volumeSet: 'increase' | 'decrease'): void => {
     if (!bgMusic) return
 
@@ -72,11 +83,14 @@ const GameOptionsProvider = ({ children }) => {
   const currentGameOptions = {
     isAudioPlaying,
     isMuted,
+    isSfxMuted,
     toggleOptionsOverlay,
     audioLevel,
+    sfx,
     setToggleOptionsOverlay,
     handleAudioLevel,
     handleMute,
+    handleMuteSFX,
     handlePlay,
     handleStop
   }

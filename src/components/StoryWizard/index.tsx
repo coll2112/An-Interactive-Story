@@ -1,6 +1,7 @@
 import clsx from 'clsx'
 import { CSSProperties, FunctionComponent } from 'react'
 import { useChapterProvider } from '~/contexts/chapter'
+import { useGameOptionsProvider } from '~/contexts/game-options'
 import { Choice as IChoice } from '~/types/story'
 import Choice from '~components/Choice'
 import OptionsOverlay from '~components/OptionsOverlay'
@@ -19,10 +20,11 @@ const StoryWizard: FunctionComponent = () => {
     setStoryChapterIndex
   } = useChapterProvider()
 
+  const { sfx } = useGameOptionsProvider()
+
   const handleChoices = (choice: IChoice) => {
-    const buttonClickSoundEffect = new Audio('sounds/button-click.mp3')
-    buttonClickSoundEffect.volume = 0.3
-    void buttonClickSoundEffect.play()
+    void sfx.load()
+    void sfx.play()
 
     if (choice.event === 'endChapter') {
       setStoryChapterIndex((state: number) => state + 1)
