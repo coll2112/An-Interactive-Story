@@ -1,7 +1,6 @@
 import clsx from 'clsx'
 import { CSSProperties, FunctionComponent } from 'react'
 import { useChapterProvider } from '~/contexts/chapter'
-import { useGameOptionsProvider } from '~/contexts/game-options'
 import { Choice as IChoice } from '~/types/story'
 import Choice from '~components/Choice'
 import OptionsOverlay from '~components/OptionsOverlay'
@@ -20,12 +19,7 @@ const StoryWizard: FunctionComponent = () => {
     setStoryChapterIndex
   } = useChapterProvider()
 
-  const { sfx } = useGameOptionsProvider()
-
   const handleChoices = (choice: IChoice) => {
-    void sfx.load()
-    void sfx.play()
-
     if (choice.event === 'endChapter') {
       setStoryChapterIndex((state: number) => state + 1)
       setActiveEvent('startChapter')
