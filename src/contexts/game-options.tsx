@@ -12,6 +12,7 @@ const GameOptionsProvider = ({ children }) => {
   const [isSfxMuted, setIsSfxMuted] = useState(false)
   const [toggleOptionsOverlay, setToggleOptionsOverlay] = useState(false)
   const [audioLevel, setAudioLevel] = useState<number>()
+  const [sfxAudioLevel, setSfxAudioLevel] = useState<number>()
 
   useEffect(() => {
     void bgMusic?.load()
@@ -35,6 +36,13 @@ const GameOptionsProvider = ({ children }) => {
       })
     }
   }, [bgMusic])
+
+  useMemo(() => {
+    if (sfx) {
+      sfx.volume = 0.5
+      setSfxAudioLevel(sfx.volume)
+    }
+  }, [sfx])
 
   const handleMute = (): void => {
     if (!bgMusic) return
@@ -80,6 +88,25 @@ const GameOptionsProvider = ({ children }) => {
     setAudioLevel(bgMusic.volume)
   }
 
+  const handleSfxAudioLevel = (volumeSet: 'increase' | 'decrease'): void => {
+    if (!sfx) return
+
+    switch (volumeSet) {
+      case 'increase':
+        if (sfx.volume >= 1) break
+        sfx.volume += 0.25
+        break
+      case 'decrease':
+        if (sfx.volume <= 0) break
+        sfx.volume -= 0.25
+        break
+      default:
+        break
+    }
+
+    setSfxAudioLevel(sfx.volume)
+  }
+
   const currentGameOptions = {
     isAudioPlaying,
     isMuted,
@@ -87,8 +114,10 @@ const GameOptionsProvider = ({ children }) => {
     toggleOptionsOverlay,
     audioLevel,
     sfx,
+    sfxAudioLevel,
     setToggleOptionsOverlay,
     handleAudioLevel,
+    handleSfxAudioLevel,
     handleMute,
     handleMuteSFX,
     handlePlay,

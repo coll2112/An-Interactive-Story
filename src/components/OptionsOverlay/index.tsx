@@ -11,7 +11,9 @@ const OptionsOverlay = () => {
     isSfxMuted,
     toggleOptionsOverlay,
     audioLevel,
+    sfxAudioLevel,
     handleAudioLevel,
+    handleSfxAudioLevel,
     handleMute,
     handleMuteSFX,
     handlePlay,
@@ -47,17 +49,12 @@ const OptionsOverlay = () => {
           </Button>
         </div>
         <div className={styles.option}>
-          <Button type="button" onClick={handleMuteSFX}>
-            {!isSfxMuted ? 'Mute' : 'Unmute'} SFX
-          </Button>
-        </div>
-        <div className={styles.option}>
           <Button
             disabled={!isAudioPlaying}
             type="button"
             onClick={() => handleAudioLevel('decrease')}
           >
-            Volume -
+            BG Volume -
           </Button>
           <p>{audioLevel * 100}</p>
           <Button
@@ -65,7 +62,21 @@ const OptionsOverlay = () => {
             type="button"
             onClick={() => handleAudioLevel('increase')}
           >
-            Volume +
+            BG Volume +
+          </Button>
+        </div>
+        <div className={styles.option}>
+          <Button type="button" onClick={handleMuteSFX}>
+            {!isSfxMuted ? 'Mute' : 'Unmute'} SFX
+          </Button>
+        </div>
+        <div className={styles.option}>
+          <Button type="button" onClick={() => handleSfxAudioLevel('decrease')}>
+            SFX Volume -
+          </Button>
+          <p>{sfxAudioLevel * 100}</p>
+          <Button type="button" onClick={() => handleSfxAudioLevel('increase')}>
+            SFX Volume +
           </Button>
         </div>
       </div>
