@@ -11,14 +11,14 @@ const Button: FunctionComponent<ButtonProps> = ({
   onClick,
   ...rest
 }) => {
-  const { sfx } = useGameOptionsProvider()
+  const { sfx } = useGameOptionsProvider() || {}
 
   const handleOnClick = (e: MouseEvent<HTMLButtonElement>) => {
     if (onClick) {
       onClick(e)
     }
-    void sfx.load()
-    void sfx.play()
+    void sfx?.load()
+    void sfx?.play()
   }
 
   return (
