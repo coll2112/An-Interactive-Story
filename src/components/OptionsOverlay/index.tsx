@@ -18,7 +18,7 @@ const OptionsOverlay = () => {
     handleStop
   } = useGameOptionsProvider()
 
-  const handleToggleAudio = (): void => {
+  const handleToggleAudio = () => {
     if (isAudioPlaying) {
       handleStop()
     } else {

@@ -2,16 +2,6 @@ import { createContext, useContext, useEffect, useMemo, useState } from 'react'
 import { Chapters } from '~/config/story'
 import { Chapter, Choice, Section } from '~/types/story'
 
-// interface DefaultValues {
-//   chapter: Chapter
-//   sections: Section
-//   currentChoices: Choice[]
-//   activeEvent: string
-//   storyChapterIndex: number
-//   setActiveEvent: Dispatch<string>
-//   setStoryChapterIndex: Dispatch<number>
-// }
-
 const ChapterContext = createContext<any>(undefined)
 
 const ChapterProvider = ({ children }) => {
@@ -21,6 +11,7 @@ const ChapterProvider = ({ children }) => {
   const [sections, setSections] = useState<Section>() || {}
   const [currentChoices, setCurrentChoices] = useState<Choice[]>()
 
+  // Checks for a new chapters and subscribes to the changes
   useEffect(() => {
     let isSubscribed = true
 
