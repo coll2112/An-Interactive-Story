@@ -1,7 +1,24 @@
 import { createContext, useContext, useEffect, useMemo, useState } from 'react'
+import { IGameOptionsContext } from '~/types/context'
 import { useChapterProvider } from './chapter'
 
-const GameOptionsContext = createContext<any>(undefined)
+const defaultContextValues: IGameOptionsContext = {
+  isAudioPlaying: false,
+  isMuted: false,
+  isSfxMuted: false,
+  toggleOptionsOverlay: false,
+  audioLevel: undefined,
+  sfxAudioLevel: undefined,
+  sfx: undefined,
+  setToggleOptionsOverlay: () => null,
+  handleAudioLevel: () => null,
+  handleMute: () => null,
+  handlePlay: () => null,
+  handleStop: () => null
+}
+
+const GameOptionsContext =
+  createContext<IGameOptionsContext>(defaultContextValues)
 
 const GameOptionsProvider = ({ children }) => {
   const { chapter } = useChapterProvider()
@@ -14,20 +31,23 @@ const GameOptionsProvider = ({ children }) => {
   const [audioLevel, setAudioLevel] = useState<number>()
   const [sfxAudioLevel, setSfxAudioLevel] = useState<number>()
 
+  // Sets the bgAudio when the chapter changes, if the chapter includes it
   useEffect(() => {
     void bgMusic?.load()
     const bgAudio = new Audio(chapter?.background?.music)
-    const buttonClickSoundEffect = new Audio('sounds/button-click.mp3')
+    const buttonClickSfx = new Audio('sounds/button-click.mp3')
 
     setBgMusic(bgAudio)
-    setSfx(buttonClickSoundEffect)
+    setSfx(buttonClickSfx)
   }, [chapter])
 
+  // Sets the correct values whenever the bgMusic changes
   useMemo(() => {
     if (bgMusic) {
       bgMusic.loop = true
       bgMusic.src = chapter.background.music
       bgMusic.volume = 0.5
+
       setAudioLevel(bgMusic.volume)
 
       // This will throw error in Chrome
@@ -37,18 +57,13 @@ const GameOptionsProvider = ({ children }) => {
     }
   }, [bgMusic])
 
+  // Sets the correct values sound effects
   useMemo(() => {
     if (sfx) {
       sfx.volume = 0.5
       setSfxAudioLevel(sfx.volume)
     }
   }, [sfx])
-
-  const handleMute = (): void => {
-    if (!bgMusic) return
-    bgMusic.muted = !bgMusic.muted
-    setIsMuted(bgMusic.muted)
-  }
 
   const handlePlay = (): void => {
     if (!bgMusic) return
@@ -63,51 +78,58 @@ const GameOptionsProvider = ({ children }) => {
     setIsAudioPlaying(false)
   }
 
-  const handleMuteSFX = () => {
-    if (!sfx) return
-    sfx.muted = !sfx.muted
-    setIsSfxMuted(sfx.muted)
-  }
+  const handleAudioLevel = (
+    volumeSet: 'increase' | 'decrease',
+    audioType: 'bgMusic' | 'sfx'
+  ): void => {
+    if (!bgMusic || !sfx) return
 
-  const handleAudioLevel = (volumeSet: 'increase' | 'decrease'): void => {
-    if (!bgMusic) return
+    if (audioType === 'bgMusic') {
+      switch (volumeSet) {
+        case 'increase':
+          if (bgMusic.volume >= 1) break
+          bgMusic.volume += 0.25
+          break
+        case 'decrease':
+          if (bgMusic.volume <= 0) break
+          bgMusic.volume -= 0.25
+          break
+        default:
+          break
+      }
 
-    switch (volumeSet) {
-      case 'increase':
-        if (bgMusic.volume >= 1) break
-        bgMusic.volume += 0.25
-        break
-      case 'decrease':
-        if (bgMusic.volume <= 0) break
-        bgMusic.volume -= 0.25
-        break
-      default:
-        break
+      setAudioLevel(bgMusic.volume)
+    } else if (audioType === 'sfx') {
+      switch (volumeSet) {
+        case 'increase':
+          if (sfx.volume >= 1) break
+          sfx.volume += 0.25
+          break
+        case 'decrease':
+          if (sfx.volume <= 0) break
+          sfx.volume -= 0.25
+          break
+        default:
+          break
+      }
+
+      setSfxAudioLevel(sfx.volume)
     }
-
-    setAudioLevel(bgMusic.volume)
   }
 
-  const handleSfxAudioLevel = (volumeSet: 'increase' | 'decrease'): void => {
-    if (!sfx) return
+  const handleMute = (audioType: 'bgMusic' | 'sfx'): void => {
+    if (!bgMusic || !sfx) return
 
-    switch (volumeSet) {
-      case 'increase':
-        if (sfx.volume >= 1) break
-        sfx.volume += 0.25
-        break
-      case 'decrease':
-        if (sfx.volume <= 0) break
-        sfx.volume -= 0.25
-        break
-      default:
-        break
+    if (audioType === 'bgMusic') {
+      bgMusic.muted = !bgMusic.muted
+      setIsMuted(bgMusic.muted)
+    } else if (audioType === 'sfx') {
+      sfx.muted = !sfx.muted
+      setIsSfxMuted(sfx.muted)
     }
-
-    setSfxAudioLevel(sfx.volume)
   }
 
-  const currentGameOptions = {
+  const currentGameOptions: IGameOptionsContext = {
     isAudioPlaying,
     isMuted,
     isSfxMuted,
@@ -117,9 +139,7 @@ const GameOptionsProvider = ({ children }) => {
     sfxAudioLevel,
     setToggleOptionsOverlay,
     handleAudioLevel,
-    handleSfxAudioLevel,
     handleMute,
-    handleMuteSFX,
     handlePlay,
     handleStop
   }

@@ -13,9 +13,7 @@ const OptionsOverlay = () => {
     audioLevel,
     sfxAudioLevel,
     handleAudioLevel,
-    handleSfxAudioLevel,
     handleMute,
-    handleMuteSFX,
     handlePlay,
     handleStop
   } = useGameOptionsProvider()
@@ -44,7 +42,11 @@ const OptionsOverlay = () => {
           </Button>
         </div>
         <div className={styles.option}>
-          <Button disabled={!isAudioPlaying} type="button" onClick={handleMute}>
+          <Button
+            disabled={!isAudioPlaying}
+            type="button"
+            onClick={() => handleMute('bgMusic')}
+          >
             {!isMuted ? 'Mute' : 'Unmute'} BG Audio
           </Button>
         </div>
@@ -52,30 +54,36 @@ const OptionsOverlay = () => {
           <Button
             disabled={!isAudioPlaying}
             type="button"
-            onClick={() => handleAudioLevel('decrease')}
+            onClick={() => handleAudioLevel('decrease', 'bgMusic')}
           >
             BG Volume -
           </Button>
-          <p>{audioLevel * 100}</p>
+          <p>{audioLevel && audioLevel * 100}</p>
           <Button
             disabled={!isAudioPlaying}
             type="button"
-            onClick={() => handleAudioLevel('increase')}
+            onClick={() => handleAudioLevel('increase', 'bgMusic')}
           >
             BG Volume +
           </Button>
         </div>
         <div className={styles.option}>
-          <Button type="button" onClick={handleMuteSFX}>
+          <Button type="button" onClick={() => handleMute('sfx')}>
             {!isSfxMuted ? 'Mute' : 'Unmute'} SFX
           </Button>
         </div>
         <div className={styles.option}>
-          <Button type="button" onClick={() => handleSfxAudioLevel('decrease')}>
+          <Button
+            type="button"
+            onClick={() => handleAudioLevel('decrease', 'sfx')}
+          >
             SFX Volume -
           </Button>
-          <p>{sfxAudioLevel * 100}</p>
-          <Button type="button" onClick={() => handleSfxAudioLevel('increase')}>
+          <p>{sfxAudioLevel && sfxAudioLevel * 100}</p>
+          <Button
+            type="button"
+            onClick={() => handleAudioLevel('increase', 'sfx')}
+          >
             SFX Volume +
           </Button>
         </div>
