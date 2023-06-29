@@ -6,6 +6,12 @@ import { useRouter } from 'next/router'
 
 import styles from './optionsOverlay.module.scss'
 
+// interface OptionButtonsConfig {
+//   buttonText: string
+//   isDisabled?: boolean
+//   onClick: () => void
+// }
+
 const OptionsOverlay = () => {
   const {
     isAudioPlaying,
@@ -24,7 +30,7 @@ const OptionsOverlay = () => {
     setToggleOptionsOverlay
   } = useGameOptionsProvider()
 
-  const { route } = useRouter()
+  const { route, push } = useRouter()
 
   const handleToggleAudio = () => {
     if (isAudioPlaying) {
@@ -38,6 +44,27 @@ const OptionsOverlay = () => {
     optionCallback()
     setToggleOptionsOverlay(false)
   }
+
+  const navigateToTitle: VoidFunction = () =>
+    route !== '/title-screen' && push('/title-screen')
+
+  // TODO Fix this to work with the buttons style.option div
+  // const optionButtonConfig: OptionButtonsConfig[] = [
+  //   {
+  //     onClick: handleToggleAudio,
+  //     buttonText: `${!isAudioPlaying ? 'Play' : 'Stop'} BG Music`
+  //   },
+  //   {
+  //     onClick: () => handleMute('bgMusic'),
+  //     buttonText: `${!isMuted ? 'Mute' : 'Unmute'} BG Audio`,
+  //     isDisabled: !isAudioPlaying
+  //   },
+  //   {
+  //     onClick: () => handleMute('bgMusic'),
+  //     buttonText: `${!isMuted ? 'Mute' : 'Unmute'} BG Audio`,
+  //     isDisabled: !isAudioPlaying
+  //   }
+  // ]
 
   return (
     <div
@@ -100,7 +127,7 @@ const OptionsOverlay = () => {
             SFX Volume +
           </Button>
         </div>
-        {route !== '/title-screen' ? (
+        {route !== '/title-screen' && (
           <>
             <div className={styles.option}>
               <Button
@@ -111,7 +138,6 @@ const OptionsOverlay = () => {
                 Save
               </Button>
             </div>
-
             <div className={styles.option}>
               <Button
                 disabled={saveData?.savedActiveEvent === null}
@@ -123,13 +149,15 @@ const OptionsOverlay = () => {
               </Button>
             </div>
           </>
-        ) : (
-          <div className={styles.option}>
-            <Button type="button" onClick={() => setToggleOptionsOverlay(false)}>
-              Return to Title Screen
-            </Button>
-          </div>
         )}
+        <div className={styles.option}>
+          <Button
+            type="button"
+            onClick={() => closeOverlayOnOptionChange(navigateToTitle)}
+          >
+            Return to Title Screen
+          </Button>
+        </div>
       </div>
     </div>
   )
