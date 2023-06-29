@@ -28,9 +28,9 @@ const GameOptionsContext =
   createContext<GameOptionsContextValues>(defaultContextValues)
 
 const GameOptionsProvider = ({ children }) => {
+  const { chapter } = useChapterProvider()
   const { saveData, handleSaveGame, handleLoadGame } = useGameSave()
 
-  const { chapter } = useChapterProvider()
   const [bgMusic, setBgMusic] = useState<HTMLAudioElement>()
   const [sfx, setSfx] = useState<HTMLAudioElement>()
   const [isAudioPlaying, setIsAudioPlaying] = useState(false)
