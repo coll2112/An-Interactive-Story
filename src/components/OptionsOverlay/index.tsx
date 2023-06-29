@@ -19,7 +19,8 @@ const OptionsOverlay = () => {
     handlePlay,
     handleStop,
     handleSaveGame,
-    handleLoadGame
+    handleLoadGame,
+    setToggleOptionsOverlay
   } = useGameOptionsProvider()
 
   const handleToggleAudio = () => {
@@ -28,6 +29,11 @@ const OptionsOverlay = () => {
     } else {
       handlePlay()
     }
+  }
+
+  const closeOverlayOnOptionChange = (optionCallback: VoidFunction) => {
+    optionCallback()
+    setToggleOptionsOverlay(false)
   }
 
   return (
@@ -92,7 +98,10 @@ const OptionsOverlay = () => {
           </Button>
         </div>
         <div className={styles.option}>
-          <Button type="button" onClick={handleSaveGame}>
+          <Button
+            type="button"
+            onClick={() => closeOverlayOnOptionChange(handleSaveGame)}
+          >
             <GiSave className={styles.icon} />
             Save
           </Button>
@@ -101,7 +110,7 @@ const OptionsOverlay = () => {
           <Button
             disabled={saveData?.savedActiveEvent === null}
             type="button"
-            onClick={handleLoadGame}
+            onClick={() => closeOverlayOnOptionChange(handleLoadGame)}
           >
             <GiLoad className={styles.icon} />
             Load

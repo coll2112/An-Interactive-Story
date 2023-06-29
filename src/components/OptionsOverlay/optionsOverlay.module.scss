@@ -13,13 +13,10 @@
 
   &-content {
     max-width: 50%;
-    height: 100%;
     margin: auto;
-    padding-top: 1.3rem;
     display: flex;
-    justify-content: center;
     flex-direction: column;
-    gap: 2rem;
+    gap: 1.5rem;
   }
 
   &-header {
@@ -44,9 +41,8 @@
     justify-content: center;
 
     p {
-      min-width: 10rem;
+      min-width: 12rem;
       text-align: center;
-      margin: auto 1rem !important;
     }
   }
 
