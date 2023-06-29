@@ -1,5 +1,5 @@
 import GameOptionsProvider from '~/contexts/game-options'
-import OptionsOverlay from '~components/OptionsOverlay'
+import { OptionsOverlay } from '~components/OptionsOverlay'
 import { TitleScreen } from '~components/TitleScreen'
 
 const Title = () => (
