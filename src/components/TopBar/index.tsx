@@ -1,6 +1,6 @@
 import { useGameOptionsProvider } from '~/contexts/game-options'
 import { Button } from '~components/Base/Button'
-import ChapterHeading from '~components/ChapterHeading'
+import { ChapterHeading } from '~components/ChapterHeading'
 import { GiHamburgerMenu } from 'react-icons/gi'
 
 import styles from './topBar.module.scss'
