@@ -2,6 +2,7 @@ import clsx from 'clsx'
 import { useGameOptionsProvider } from '~/contexts/game-options'
 import Button from '~components/Base/Button'
 import { GiLoad, GiSave } from 'react-icons/gi'
+import { useRouter } from 'next/router'
 
 import styles from './optionsOverlay.module.scss'
 
@@ -22,6 +23,8 @@ const OptionsOverlay = () => {
     handleLoadGame,
     setToggleOptionsOverlay
   } = useGameOptionsProvider()
+
+  const { route } = useRouter()
 
   const handleToggleAudio = () => {
     if (isAudioPlaying) {
@@ -97,25 +100,36 @@ const OptionsOverlay = () => {
             SFX Volume +
           </Button>
         </div>
-        <div className={styles.option}>
-          <Button
-            type="button"
-            onClick={() => closeOverlayOnOptionChange(handleSaveGame)}
-          >
-            <GiSave className={styles.icon} />
-            Save
-          </Button>
-        </div>
-        <div className={styles.option}>
-          <Button
-            disabled={saveData?.savedActiveEvent === null}
-            type="button"
-            onClick={() => closeOverlayOnOptionChange(handleLoadGame)}
-          >
-            <GiLoad className={styles.icon} />
-            Load
-          </Button>
-        </div>
+        {route !== '/title-screen' ? (
+          <>
+            <div className={styles.option}>
+              <Button
+                type="button"
+                onClick={() => closeOverlayOnOptionChange(handleSaveGame)}
+              >
+                <GiSave className={styles.icon} />
+                Save
+              </Button>
+            </div>
+
+            <div className={styles.option}>
+              <Button
+                disabled={saveData?.savedActiveEvent === null}
+                type="button"
+                onClick={() => closeOverlayOnOptionChange(handleLoadGame)}
+              >
+                <GiLoad className={styles.icon} />
+                Load
+              </Button>
+            </div>
+          </>
+        ) : (
+          <div className={styles.option}>
+            <Button type="button" onClick={() => setToggleOptionsOverlay(false)}>
+              Return to Title Screen
+            </Button>
+          </div>
+        )}
       </div>
     </div>
   )

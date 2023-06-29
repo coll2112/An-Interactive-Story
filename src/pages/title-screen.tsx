@@ -5,7 +5,7 @@ import Button from '~components/Base/Button'
 
 const Title = () => {
   const router = useRouter()
-  const { handleLoadGame } = useGameOptionsProvider()
+  const { handleLoadGame, setToggleOptionsOverlay } = useGameOptionsProvider()
   const { setActiveEvent, setStoryChapterIndex } = useChapterProvider()
 
   const navigateOnClick = (route: string, callbackFn?: VoidFunction): void => {
@@ -28,8 +28,9 @@ const Title = () => {
         New Game
       </Button>
       <Button onClick={() => navigateOnClick('/game', handleLoadGame)}>
-        Load Previous Game
+        Load Game
       </Button>
+      <Button onClick={() => setToggleOptionsOverlay(true)}>Options</Button>
     </div>
   )
 }
