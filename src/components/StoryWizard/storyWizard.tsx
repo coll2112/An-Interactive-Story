@@ -4,7 +4,7 @@ import { useChapterProvider } from '~/contexts/chapter'
 import { Choice as IChoice } from '~/types/story'
 import { Choice } from '~components/Choice'
 import { SectionText } from '~components/SectionText'
-import TopBar from '~components/TopBar'
+import { TopBar } from '~components/TopBar'
 
 import styles from './storyWizard.module.scss'
 
