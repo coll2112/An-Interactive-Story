@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useMemo, useState } from 'react'
 import { GameOptionsContextValues } from '~/types/context'
+import useGameSave from '~/hooks/useGameSave'
 import { useChapterProvider } from './chapter'
 
 const defaultContextValues: GameOptionsContextValues = {
@@ -10,17 +11,25 @@ const defaultContextValues: GameOptionsContextValues = {
   audioLevel: undefined,
   sfxAudioLevel: undefined,
   sfx: undefined,
+  saveData: {
+    savedActiveEvent: 'startChapter',
+    savedChapterIndex: 0
+  },
   setToggleOptionsOverlay: () => null,
   handleAudioLevel: () => null,
   handleMute: () => null,
   handlePlay: () => null,
-  handleStop: () => null
+  handleStop: () => null,
+  handleLoadGame: () => null,
+  handleSaveGame: () => null
 }
 
 const GameOptionsContext =
   createContext<GameOptionsContextValues>(defaultContextValues)
 
 const GameOptionsProvider = ({ children }) => {
+  const { saveData, handleSaveGame, handleLoadGame } = useGameSave()
+
   const { chapter } = useChapterProvider()
   const [bgMusic, setBgMusic] = useState<HTMLAudioElement>()
   const [sfx, setSfx] = useState<HTMLAudioElement>()
@@ -137,11 +146,14 @@ const GameOptionsProvider = ({ children }) => {
     audioLevel,
     sfx,
     sfxAudioLevel,
+    saveData,
     setToggleOptionsOverlay,
     handleAudioLevel,
     handleMute,
     handlePlay,
-    handleStop
+    handleStop,
+    handleSaveGame,
+    handleLoadGame
   }
 
   return (

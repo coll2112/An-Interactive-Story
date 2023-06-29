@@ -9,6 +9,10 @@ export interface GameOptionsContextValues {
   audioLevel: number | undefined
   sfxAudioLevel: number | undefined
   sfx: HTMLAudioElement | undefined
+  saveData: {
+    savedActiveEvent: string
+    savedChapterIndex: number
+  }
   setToggleOptionsOverlay: Dispatch<boolean>
   handleAudioLevel(
     volumeSet: 'increase' | 'decrease',
@@ -17,6 +21,8 @@ export interface GameOptionsContextValues {
   handleMute(audioType: 'bgMusic' | 'sfx'): void
   handlePlay(): void
   handleStop(): void
+  handleSaveGame(): void
+  handleLoadGame(): void
 }
 
 export interface ChapterContextValues {

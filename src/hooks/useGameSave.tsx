@@ -12,7 +12,7 @@ const useGameSave = () => {
   const [saveData, setSaveData] = useState<{
     savedActiveEvent: string
     savedChapterIndex: number
-  }>()
+  }>({ savedActiveEvent: 'startChapter', savedChapterIndex: 0 })
 
   const handleSaveGame = () => {
     localStorage.setItem('activeEvent', activeEvent)

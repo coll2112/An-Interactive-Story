@@ -12,8 +12,8 @@
   transition: opacity 0.2s ease-in-out;
 
   &-content {
-    width: 45%;
-    height: 50%;
+    max-width: 50%;
+    height: 100%;
     margin: auto;
     padding-top: 1.3rem;
     display: flex;
@@ -50,13 +50,18 @@
     }
   }
 
-  &:nth-of-type(4) {
-    margin-top: 1.5rem;
+  &:nth-of-type(4),
+  &:nth-of-type(6) {
+    margin-top: 2.5rem;
   }
 
   button {
     border: 0.1rem solid #bcc4d8;
     width: 100%;
+
+    .icon {
+      margin-right: 0.5rem;
+    }
   }
 
   p {

@@ -1,6 +1,7 @@
 import clsx from 'clsx'
 import { useGameOptionsProvider } from '~/contexts/game-options'
 import Button from '~components/Base/Button'
+import { GiLoad, GiSave } from 'react-icons/gi'
 
 import styles from './optionsOverlay.module.scss'
 
@@ -12,10 +13,13 @@ const OptionsOverlay = () => {
     toggleOptionsOverlay,
     audioLevel,
     sfxAudioLevel,
+    saveData,
     handleAudioLevel,
     handleMute,
     handlePlay,
-    handleStop
+    handleStop,
+    handleSaveGame,
+    handleLoadGame
   } = useGameOptionsProvider()
 
   const handleToggleAudio = () => {
@@ -85,6 +89,22 @@ const OptionsOverlay = () => {
             onClick={() => handleAudioLevel('increase', 'sfx')}
           >
             SFX Volume +
+          </Button>
+        </div>
+        <div className={styles.option}>
+          <Button type="button" onClick={handleSaveGame}>
+            <GiSave className={styles.icon} />
+            Save
+          </Button>
+        </div>
+        <div className={styles.option}>
+          <Button
+            disabled={saveData?.savedActiveEvent === null}
+            type="button"
+            onClick={handleLoadGame}
+          >
+            <GiLoad className={styles.icon} />
+            Load
           </Button>
         </div>
       </div>

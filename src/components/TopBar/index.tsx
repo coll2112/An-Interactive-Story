@@ -1,7 +1,7 @@
 import { useGameOptionsProvider } from '~/contexts/game-options'
-import useGameSave from '~/hooks/useGameSave'
 import Button from '~components/Base/Button'
 import ChapterHeading from '~components/ChapterHeading'
+import { GiHamburgerMenu } from 'react-icons/gi'
 
 import styles from './topBar.module.scss'
 
@@ -10,7 +10,6 @@ interface Props {
 }
 
 const TopBar = ({ chapterHeading }: Props) => {
-  const { saveData, handleSaveGame, handleLoadGame } = useGameSave()
   const { setToggleOptionsOverlay, toggleOptionsOverlay } =
     useGameOptionsProvider()
 
@@ -22,18 +21,8 @@ const TopBar = ({ chapterHeading }: Props) => {
     <div className={styles.container}>
       <ChapterHeading chapterHeading={chapterHeading} />
       <div className={styles['container-buttons']}>
-        <Button type="button" onClick={handleSaveGame}>
-          Save Game
-        </Button>
-        <Button
-          disabled={saveData?.savedActiveEvent === null}
-          type="button"
-          onClick={handleLoadGame}
-        >
-          Load Game
-        </Button>
         <Button type="button" onClick={handleOptionsOverlay}>
-          Options
+          <GiHamburgerMenu />
         </Button>
       </div>
     </div>

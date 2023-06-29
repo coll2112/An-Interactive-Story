@@ -10,6 +10,9 @@
   font-family: $subText;
   font-size: 1.5rem;
   color: #bcc4d8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   &:hover {
     cursor: pointer;
