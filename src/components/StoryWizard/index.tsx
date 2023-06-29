@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import { CSSProperties, FunctionComponent } from 'react'
+import { CSSProperties, useEffect, useState } from 'react'
 import { useChapterProvider } from '~/contexts/chapter'
 import { Choice as IChoice } from '~/types/story'
 import Choice from '~components/Choice'
@@ -9,7 +9,9 @@ import TopBar from '~components/TopBar'
 
 import styles from './storyWizard.module.scss'
 
-const StoryWizard: FunctionComponent = () => {
+const FADE_IN_OUT_TIME = 800
+
+const StoryWizard: React.FC = () => {
   const {
     chapter,
     sections,
@@ -18,14 +20,23 @@ const StoryWizard: FunctionComponent = () => {
     setActiveEvent,
     setStoryChapterIndex
   } = useChapterProvider()
+  const [isVisible, setIsVisible] = useState(false)
+
+  useEffect(() => {
+    setTimeout(() => setIsVisible(true), FADE_IN_OUT_TIME)
+  })
 
   const handleChoices = (choice: IChoice) => {
-    if (choice.event === 'endChapter') {
-      setStoryChapterIndex((state: number) => state + 1)
-      setActiveEvent('startChapter')
-    } else {
-      setActiveEvent(choice.event)
-    }
+    setIsVisible(false)
+    setTimeout(() => {
+      if (choice.event === 'endChapter') {
+        setStoryChapterIndex((state: number) => state + 1)
+        setActiveEvent('startChapter')
+      } else {
+        setActiveEvent(choice.event)
+      }
+      setIsVisible(true)
+    }, FADE_IN_OUT_TIME)
   }
 
   const backgroundStyles: CSSProperties = {
@@ -44,7 +55,13 @@ const StoryWizard: FunctionComponent = () => {
       <div className={styles['viewport']}>
         <span className={styles['viewport-bgImage']} style={backgroundStyles} />
         <OptionsOverlay />
-        <SectionText sectionText={sections?.[activeEvent]?.text} />
+        <SectionText
+          className={clsx(
+            styles['fade-in-out'],
+            isVisible ? styles['fade-in'] : ''
+          )}
+          sectionText={sections?.[activeEvent]?.text}
+        />
         <div
           className={clsx(
             styles['btn-container'],

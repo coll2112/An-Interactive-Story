@@ -1,4 +1,4 @@
-import { Dispatch } from 'react'
+import { Dispatch, SetStateAction } from 'react'
 import { Chapter, Choice, Section } from './story'
 
 export interface GameOptionsContextValues {
@@ -25,6 +25,6 @@ export interface ChapterContextValues {
   currentChoices: Choice[] | undefined
   activeEvent: string
   storyChapterIndex: number
-  setActiveEvent: Dispatch<string>
-  setStoryChapterIndex: Dispatch<number>
+  setActiveEvent: Dispatch<SetStateAction<string>>
+  setStoryChapterIndex: Dispatch<SetStateAction<number>>
 }
