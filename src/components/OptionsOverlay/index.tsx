@@ -39,8 +39,10 @@ const OptionsOverlay = () => {
     setToggleOptionsOverlay(false)
   }
 
-  const navigateToTitle: VoidFunction = () =>
-    route !== '/title' && push('/title')
+  const navigateToTitle: VoidFunction = () => {
+    handleStop()
+    return route !== '/title' && push('/title')
+  }
 
   return (
     <div

@@ -2,8 +2,8 @@ import { useRouter } from 'next/router'
 import { useChapterProvider } from '~/contexts/chapter'
 import { useGameOptionsProvider } from '~/contexts/game-options'
 import Button from '~components/Base/Button'
-
 import ChapterHeading from '~components/ChapterHeading'
+
 import styles from './titleScreen.module.scss'
 
 export const TitleScreen = () => {

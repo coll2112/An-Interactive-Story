@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useMemo, useState } from 'react'
 import { GameOptionsContextValues } from '~/types/context'
 import useGameSave from '~/hooks/useGameSave'
+import { useRouter } from 'next/router'
 import { useChapterProvider } from './chapter'
 
 const defaultContextValues: GameOptionsContextValues = {
@@ -28,6 +29,7 @@ const GameOptionsContext =
   createContext<GameOptionsContextValues>(defaultContextValues)
 
 const GameOptionsProvider = ({ children }) => {
+  const { pathname } = useRouter()
   const { chapter } = useChapterProvider()
   const { saveData, handleSaveGame, handleLoadGame } = useGameSave()
 
@@ -42,17 +44,20 @@ const GameOptionsProvider = ({ children }) => {
 
   // Sets the bgAudio when the chapter changes, if the chapter includes it
   useEffect(() => {
-    void bgMusic?.load()
-    const bgAudio = new Audio(chapter?.background?.music)
     const buttonClickSfx = new Audio('sounds/button-click.mp3')
+    const bgAudio = new Audio(chapter?.background?.music)
 
     setBgMusic(bgAudio)
     setSfx(buttonClickSfx)
+
+    bgMusic?.load()
   }, [chapter])
 
   // Sets the correct values whenever the bgMusic changes
   useMemo(() => {
-    if (bgMusic && chapter?.background?.music) {
+    const isTitleScreen = pathname.includes('/title')
+
+    if (!isTitleScreen && bgMusic && chapter?.background?.music) {
       bgMusic.loop = true
       bgMusic.src = chapter?.background?.music
       bgMusic.volume = 0.5
@@ -64,7 +69,7 @@ const GameOptionsProvider = ({ children }) => {
         setIsAudioPlaying(true)
       })
     }
-  }, [bgMusic])
+  }, [bgMusic, pathname])
 
   // Sets the correct values sound effects
   useMemo(() => {
