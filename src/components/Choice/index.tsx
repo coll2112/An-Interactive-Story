@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react'
 import { Choice as ChoiceType } from '~/types/story'
-import Button from '~components/Base/Button'
+import { Button } from '~components/Base/Button'
 
 interface ChoiceProps {
   choice: ChoiceType

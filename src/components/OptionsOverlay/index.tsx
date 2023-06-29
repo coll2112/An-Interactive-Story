@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 import { useGameOptionsProvider } from '~/contexts/game-options'
-import Button from '~components/Base/Button'
+import { Button } from '~components/Base/Button'
 import { GiLoad, GiSave } from 'react-icons/gi'
 import { useRouter } from 'next/router'
 

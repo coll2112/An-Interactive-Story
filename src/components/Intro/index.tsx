@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router'
-import Button from '~components/Base/Button'
+import { Button } from '~components/Base/Button'
 
 import styles from './intro.module.scss'
 
