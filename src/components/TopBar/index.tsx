@@ -19,7 +19,7 @@ const TopBar = ({ chapterHeading }: Props) => {
 
   return (
     <div className={styles.container}>
-      <ChapterHeading chapterHeading={chapterHeading} />
+      <ChapterHeading>{chapterHeading}</ChapterHeading>
       <div className={styles['container-buttons']}>
         <Button type="button" onClick={handleOptionsOverlay}>
           <GiHamburgerMenu />
