@@ -1,10 +1,5 @@
-import GameOptionsProvider from '~/contexts/game-options'
 import StoryWizard from '~components/StoryWizard'
 
-const Game = () => (
-  <GameOptionsProvider>
-    <StoryWizard />
-  </GameOptionsProvider>
-)
+const Game = () => <StoryWizard />
 
 export default Game
