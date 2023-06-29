@@ -1,5 +1,5 @@
-import TitleScreen from '~components/TitleScreen'
+import Intro from '~components/Intro'
 
-const Home = () => <TitleScreen />
+const Home = () => <Intro />
 
 export default Home

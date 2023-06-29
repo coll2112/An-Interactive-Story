@@ -3,7 +3,7 @@ import { useChapterProvider } from '~/contexts/chapter'
 import { useGameOptionsProvider } from '~/contexts/game-options'
 import Button from '~components/Base/Button'
 
-const Title = () => {
+export const TitleScreen = () => {
   const router = useRouter()
   const { handleLoadGame, setToggleOptionsOverlay } = useGameOptionsProvider()
   const { setActiveEvent, setStoryChapterIndex } = useChapterProvider()
@@ -34,5 +34,3 @@ const Title = () => {
     </div>
   )
 }
-
-export default Title

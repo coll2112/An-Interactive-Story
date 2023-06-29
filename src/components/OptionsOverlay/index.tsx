@@ -40,7 +40,7 @@ const OptionsOverlay = () => {
   }
 
   const navigateToTitle: VoidFunction = () =>
-    route !== '/title-screen' && push('/title-screen')
+    route !== '/title' && push('/title')
 
   return (
     <div
@@ -103,7 +103,7 @@ const OptionsOverlay = () => {
             SFX Volume +
           </Button>
         </div>
-        {route !== '/title-screen' && (
+        {route !== '/title' && (
           <>
             <div className={styles.option}>
               <Button

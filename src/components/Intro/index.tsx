@@ -1,13 +1,13 @@
 import { useRouter } from 'next/router'
 import Button from '~components/Base/Button'
 
-import styles from './titleScreen.module.scss'
+import styles from './intro.module.scss'
 
-const TitleScreen = () => {
+const Intro = () => {
   const router = useRouter()
 
   return (
-    <div className={styles['title-screen-container']}>
+    <div className={styles['intro-container']}>
       <h2>WARNING</h2>
       <p>
         This project is a work in progress. Bugs will be present, and certain
@@ -16,7 +16,7 @@ const TitleScreen = () => {
       </p>
       <Button
         onClick={() => {
-          void router.push('/title-screen')
+          void router.push('/title')
         }}
       >
         Confirm & Continue
@@ -25,4 +25,4 @@ const TitleScreen = () => {
   )
 }
 
-export default TitleScreen
+export default Intro
