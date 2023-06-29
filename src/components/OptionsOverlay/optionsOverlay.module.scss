@@ -10,13 +10,16 @@
   opacity: 100;
   pointer-events: initial;
   transition: opacity 0.2s ease-in-out;
+  z-index: 10;
 
   &-content {
     max-width: 50%;
     margin: auto;
+    padding-top: 5rem;
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
+    color: $text;
   }
 
   &-header {
@@ -42,6 +45,8 @@
 
     p {
       min-width: 12rem;
+      z-index: 10;
+
       text-align: center;
     }
   }

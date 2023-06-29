@@ -3,7 +3,6 @@ import { CSSProperties, useEffect, useState } from 'react'
 import { useChapterProvider } from '~/contexts/chapter'
 import { Choice as IChoice } from '~/types/story'
 import Choice from '~components/Choice'
-import OptionsOverlay from '~components/OptionsOverlay'
 import SectionText from '~components/SectionText'
 import TopBar from '~components/TopBar'
 
@@ -54,7 +53,6 @@ const StoryWizard: React.FC = () => {
       <TopBar chapterHeading={chapter.name} />
       <div className={styles['viewport']}>
         <span className={styles['viewport-bgImage']} style={backgroundStyles} />
-        <OptionsOverlay />
         <SectionText
           className={clsx(
             styles['fade-in-out'],
