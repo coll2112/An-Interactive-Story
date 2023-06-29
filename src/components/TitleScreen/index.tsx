@@ -16,7 +16,7 @@ const TitleScreen = () => {
       </p>
       <Button
         onClick={() => {
-          void router.push('game')
+          void router.push('/title-screen')
         }}
       >
         Confirm & Continue

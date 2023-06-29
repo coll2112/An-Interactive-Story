@@ -6,12 +6,6 @@ import { useRouter } from 'next/router'
 
 import styles from './optionsOverlay.module.scss'
 
-// interface OptionButtonsConfig {
-//   buttonText: string
-//   isDisabled?: boolean
-//   onClick: () => void
-// }
-
 const OptionsOverlay = () => {
   const {
     isAudioPlaying,
@@ -47,24 +41,6 @@ const OptionsOverlay = () => {
 
   const navigateToTitle: VoidFunction = () =>
     route !== '/title-screen' && push('/title-screen')
-
-  // TODO Fix this to work with the buttons style.option div
-  // const optionButtonConfig: OptionButtonsConfig[] = [
-  //   {
-  //     onClick: handleToggleAudio,
-  //     buttonText: `${!isAudioPlaying ? 'Play' : 'Stop'} BG Music`
-  //   },
-  //   {
-  //     onClick: () => handleMute('bgMusic'),
-  //     buttonText: `${!isMuted ? 'Mute' : 'Unmute'} BG Audio`,
-  //     isDisabled: !isAudioPlaying
-  //   },
-  //   {
-  //     onClick: () => handleMute('bgMusic'),
-  //     buttonText: `${!isMuted ? 'Mute' : 'Unmute'} BG Audio`,
-  //     isDisabled: !isAudioPlaying
-  //   }
-  // ]
 
   return (
     <div
