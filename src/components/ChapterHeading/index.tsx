@@ -1,13 +1,15 @@
-import { FunctionComponent } from 'react'
+import clsx from 'clsx'
+import { PropsWithChildren } from 'react'
 
 import styles from './chapterHeading.module.scss'
 
-interface ChapterHeadingProps {
-  chapterHeading: string
+interface ChapterHeadingProps extends PropsWithChildren {
+  className?: string
 }
 
-const ChapterHeading: FunctionComponent<ChapterHeadingProps> = ({
-  chapterHeading
-}) => <h4 className={styles['heading-text']}>{chapterHeading}</h4>
+const ChapterHeading: React.FC<ChapterHeadingProps> = ({
+  children,
+  className
+}) => <h4 className={clsx(styles['heading-text'], className)}>{children}</h4>
 
 export default ChapterHeading
