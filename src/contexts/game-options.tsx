@@ -51,7 +51,7 @@ const GameOptionsProvider = ({ children }) => {
     setSfx(buttonClickSfx)
 
     bgMusic?.load()
-  }, [chapter])
+  }, [pathname, chapter])
 
   // Sets the correct values whenever the bgMusic changes
   useMemo(() => {
