@@ -1,8 +1,19 @@
 import { createContext, useContext, useEffect, useMemo, useState } from 'react'
 import { Chapters } from '~/config/story'
+import { ChapterContextValues } from '~/types/context'
 import { Chapter, Choice, Section } from '~/types/story'
 
-const ChapterContext = createContext<any>(undefined)
+const defaultContextValues: ChapterContextValues = {
+  chapter: undefined,
+  sections: undefined,
+  currentChoices: undefined,
+  activeEvent: '',
+  storyChapterIndex: 0,
+  setActiveEvent: () => null,
+  setStoryChapterIndex: () => null
+}
+
+const ChapterContext = createContext<ChapterContextValues>(defaultContextValues)
 
 const ChapterProvider = ({ children }) => {
   const [activeEvent, setActiveEvent] = useState<string>('startChapter')

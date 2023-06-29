@@ -1,8 +1,8 @@
 import { createContext, useContext, useEffect, useMemo, useState } from 'react'
-import { IGameOptionsContext } from '~/types/context'
+import { GameOptionsContextValues } from '~/types/context'
 import { useChapterProvider } from './chapter'
 
-const defaultContextValues: IGameOptionsContext = {
+const defaultContextValues: GameOptionsContextValues = {
   isAudioPlaying: false,
   isMuted: false,
   isSfxMuted: false,
@@ -18,7 +18,7 @@ const defaultContextValues: IGameOptionsContext = {
 }
 
 const GameOptionsContext =
-  createContext<IGameOptionsContext>(defaultContextValues)
+  createContext<GameOptionsContextValues>(defaultContextValues)
 
 const GameOptionsProvider = ({ children }) => {
   const { chapter } = useChapterProvider()
@@ -43,9 +43,9 @@ const GameOptionsProvider = ({ children }) => {
 
   // Sets the correct values whenever the bgMusic changes
   useMemo(() => {
-    if (bgMusic) {
+    if (bgMusic && chapter?.background?.music) {
       bgMusic.loop = true
-      bgMusic.src = chapter.background.music
+      bgMusic.src = chapter?.background?.music
       bgMusic.volume = 0.5
 
       setAudioLevel(bgMusic.volume)
@@ -129,7 +129,7 @@ const GameOptionsProvider = ({ children }) => {
     }
   }
 
-  const currentGameOptions: IGameOptionsContext = {
+  const currentGameOptions: GameOptionsContextValues = {
     isAudioPlaying,
     isMuted,
     isSfxMuted,
