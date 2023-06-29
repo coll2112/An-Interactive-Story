@@ -64,10 +64,10 @@ const StoryWizard: React.FC = () => {
         />
         <div
           className={clsx(
-            styles['btn-container'],
+            styles['button-container'],
             currentChoices && currentChoices.length <= 1
-              ? styles['btn-container-single-choice']
-              : styles['btn-container-multiple-choice']
+              ? styles['button-container-single-choice']
+              : styles['button-container-multiple-choice']
           )}
         >
           {currentChoices?.map((choice) => (
