@@ -50,7 +50,7 @@ const ChapterProvider = ({ children }) => {
     setActiveEvent(activeEvent)
   }, [chapter, sections, activeEvent])
 
-  const currentChapterValues = {
+  const currentChapterValues: ChapterContextValues = {
     chapter,
     sections,
     currentChoices,
